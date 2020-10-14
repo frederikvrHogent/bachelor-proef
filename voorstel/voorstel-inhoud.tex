@@ -2,25 +2,23 @@
 
 \section{Introductie} % The \section*{} command stops section numbering
 \label{sec:introductie}
+In het laatste decenium is data-generatie en -verwerking steeds meer op de voorgrond getreden. Moderne bedrijven proberen zo veel mogelijk data digitaal te genereren en op te slaan - zonder dat daar fysieke documenten aan te pas komen. Een groot deel van de bedrijven heeft echter nog steeds een verouderd papieren archief.
+Digitalisatie van documenten is van cruciaal belang voor een bedrijf om gemakkelijker de huidige stand van zaken te analyseren en om te proberen toekomstige trends te voorspellen(add reference). In verschillende sectoren wordt er daarom steeds meer ingezet op digitalisatie van deze papieren archieven (add reference). 
 
-Hier introduceer je werk. Je hoeft hier nog niet te technisch te gaan.
+Binnen dit vakgebied wordt er veelal gefocused op het archiveren van documenten met tekst, er bestaat weinig onderzoek naar het archiveren van foto-archieven op basis van machine learning. Aangezien digitale foto's pas populairder werden dan fysieke foto's rond het jaar 2000 (add reference) zijn er ongetwijfeld nog archieven met niet-gedigitaliseerde foto's. Indien foto's wel al gedigitaliseerd werden ontbreekt er in veel gevallen labeling - zonder labeling is de foto onvindbaar bij zoekopdrachten.
 
-Je beschrijft zeker:
+Binnen het automatisch labelen van documenten is er door middel van machine learning grote vooruitgang geboekt (add reference). Een belangrijke evolutie is dat engines nu algemeen getrained worden en niet meer specifiek worden opgezet voor specifieke type's afbeeldingen. Deze moderne engines kunnen voor een breed aantal types afbeeldingen juiste herkenningen maken. In dit onderzoek werd gekozen om enkel met machine learning engines te werken die algemeen getraind werden, de meest toonaangevende engines (add reference) die op deze manier werken zijn Google Vision en AWS Rekognition.
+Dit onderzoek zal aantonen welke engine de beste performance heeft, pricing models worden buiten beschouwing gelaten.
 
-\begin{itemize}
-  \item de probleemstelling en context
-  \item de motivatie en relevantie voor het onderzoek
-  \item de doelstelling en onderzoeksvraag/-vragen
-\end{itemize}
+Omdat de scope foto's nog steeds zeer breed is zal er verder beperkt woren tot foto's van dieren. Foto's van dieren zijn een ideaal onderwerp voor machine learning labeling omdat het een categorie is met veel subcagetorien en er is een grote hoeveelheid sample-materiaal beschikbaar.
+
 
 %---------- Stand van zaken ---------------------------------------------------
 
 \section{State-of-the-art}
 \label{sec:state-of-the-art}
 
-Hier beschrijf je de \emph{state-of-the-art} rondom je gekozen onderzoeksdomein. Dit kan bijvoorbeeld een literatuurstudie zijn. Je mag de titel van deze sectie ook aanpassen (literatuurstudie, stand van zaken, enz.). Zijn er al gelijkaardige onderzoeken gevoerd? Wat concluderen ze? Wat is het verschil met jouw onderzoek? Wat is de relevantie met jouw onderzoek?
-
-Verwijs bij elke introductie van een term of bewering over het domein naar de vakliteratuur, bijvoorbeeld~\autocite{Doll1954}! Denk zeker goed na welke werken je refereert en waarom.
+Er is weinig wetenschappelijk onderzoek verricht naar image labeling op basis van machine learning modellen. Eerder onderzoek focust zich meer op het labelen van images op basis van mining van zoekresultaten (https://ieeexplore.ieee.org/abstract/document/4527251) of op het opstellen van grafische user-interfaces voor het labelen van images (https://dl.acm.org/doi/abs/10.1145/2304496.2304498) (https://dl.acm.org/doi/abs/10.1145/985692.985733).
 
 % Voor literatuurverwijzingen zijn er twee belangrijke commando's:
 % \autocite{KEY} => (Auteur, jaartal) Gebruik dit als de naam van de auteur
@@ -29,23 +27,47 @@ Verwijs bij elke introductie van een term of bewering over het domein naar de va
 %   functie heeft in de zin (bv. ``Uit onderzoek door Doll & Hill (1954) bleek
 %   ...'')
 
-Je mag gerust gebruik maken van subsecties in dit onderdeel.
 
 %---------- Methodologie ------------------------------------------------------
 \section{Methodologie}
 \label{sec:methodologie}
 
-Hier beschrijf je hoe je van plan bent het onderzoek te voeren. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor experimenten, vragenlijsten, simulaties? Je beschrijft ook al welke tools je denkt hiervoor te gebruiken of te ontwikkelen.
+Het vergelijkend onderzoek tussen deze twee engines wordt opgedeeld in drie onderdelen:
+
+\begin{enumerate}
+    \item Opstellen van test-data
+    \item Versturen van de test-data naar de engines
+    \item Analyseren van het resultaat
+\end{enumerate}
+
+1. Opstellen van test-data
+\linebreak
+Op basis van Google image searches wordt er een set van afbeeldingen gecreëerd, deze afbeeldingen worden in subcategorieen onderverdeeld naar soort dier.
+
+2. Versturen an de test-data naar de engines
+\linebreak
+Zowel bij Google Vision als bij AWS Rekognition moet er eerst een account aangemaakt worden voor de image labeling gebruikt kan worden. Beide engines laten het toe om minstens 1000 afbeeldingen gratis te verwerken. De engines zijn bereikbaar via een API, die geïntegreerd kan worden met een SDK.
+
+Via een .net console project zullen beide SDK's geintegreerd worden. De test-data wordt naar beide API's gestuurd, de resultaten worden opgevangen en in een csv file weggeschreven.
+
+3. Analyseren van het resultaat
+\linebreak
+Op basis van deze de csv file wordt er een analyse gemaakt over de kwaliteit van beide engines.
+
+Het is belangrijk om bij het analyseren van de resultaten niet alleen naar de succesvolle resultaten te bekijken maar ook te checken hoeveel resultaten er false positives zijn. False positivies zijn afbeedlingen waarvan de engine zeker is dat het resultaat juist is maar waarvan het resultaat verkeerd is.
+De false postiive analyse zal gebeuren op basis van de zekerheidsgraad of confidence level die ook meegestuurd wordt door de API's.
+
+Een laatste factor die zal meetellen in de analyse is de snelheid van verwerken, hoe snel konden de engines de afbeeldingen verwerken en een resultaat sturen. In dit onderzoek met beperkte data zal de snelheid van verwerking geen rol spelen, maar naar schaalbaarheid is dit een belangrijke factor.
 
 %---------- Verwachte resultaten ----------------------------------------------
 \section{Verwachte resultaten}
 \label{sec:verwachte_resultaten}
-
-Hier beschrijf je welke resultaten je verwacht. Als je metingen en simulaties uitvoert, kan je hier al mock-ups maken van de grafieken samen met de verwachte conclusies. Benoem zeker al je assen en de stukken van de grafiek die je gaat gebruiken. Dit zorgt ervoor dat je concreet weet hoe je je data gaat moeten structureren.
+De engines worden geacht om met een grote mate van zekerheid, minstens 80 percent, correct afbeeldingen te analyseren en te labelen. Een bepalende factor zal waarschijnlijk de hoeveelheid ruis zijn die op de afbeelding aanwezig is. Met ruis worden achtegrond-figuren of voorwerpen bedoeld die de herkenning verstoren.
+Er wordt verwacht dat de verwerkingssnelheid heel hoog zal liggen, met verwerkingstijdens per afbeeldingen <1 seconde.
 
 %---------- Verwachte conclusies ----------------------------------------------
 \section{Verwachte conclusies}
 \label{sec:verwachte_conclusies}
-
-Hier beschrijf je wat je verwacht uit je onderzoek, met de motivatie waarom. Het is \textbf{niet} erg indien uit je onderzoek andere resultaten en conclusies vloeien dan dat je hier beschrijft: het is dan juist interessant om te onderzoeken waarom jouw hypothesen niet overeenkomen met de resultaten.
+Aangezien beide engines door grote bedrijven worden gebacked met veel financiele middelen wordt er niet verwacht dat er een groot verschil zal zijn tussen het resultaat in de image processing. Vermoedelijk zal 1 engine beter zijn in een bepaald deelprobleem en zal de andere engine dan weer beter zijn in een ander deelprobleem.
+Aangezien er geen wetenschappelijk onderzoek te vinden is die beide engines met elkaar vergelijkt zal er gewacht moet worden op het resultaat van het onderzoek om de conclusie beter te definieren.
 
