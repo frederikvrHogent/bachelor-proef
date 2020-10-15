@@ -10,7 +10,7 @@
 }
 
 @Article{Wang2008,
-  author       = {Xin-Jing Wang, Lei Zhang, Xirong Li, Wei-Ying Ma},
+  author       = {Xin-Jing Wang and Lei Zhang and Xirong Li and Wei-Ying M},
   date         = {2008},
   journaltitle = {IEEE},
   title        = {Annotating Images by Mining Image Search Results},

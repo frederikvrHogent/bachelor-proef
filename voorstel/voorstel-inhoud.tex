@@ -2,26 +2,30 @@
 
 \section{Introductie} % The \section*{} command stops section numbering
 \label{sec:introductie}
-In het laatste decenium is data-generatie en -verwerking steeds meer op de voorgrond getreden. Moderne bedrijven proberen zo veel mogelijk data digitaal te genereren en op te slaan - zonder dat daar fysieke documenten aan te pas komen. Een groot deel van de bedrijven heeft echter nog steeds een verouderd papieren archief.
-Digitalisatie van documenten is van cruciaal belang voor een bedrijf om gemakkelijker de huidige stand van zaken te analyseren en om te proberen toekomstige trends te voorspellen(add reference). In verschillende sectoren wordt er daarom steeds meer ingezet op digitalisatie van deze papieren archieven (add reference). 
+In het laatste decenium is data-generatie en -verwerking steeds meer op de voorgrond getreden. Moderne ondernemingen proberen zo veel mogelijk data digitaal te genereren en op te slaan - zonder dat daar fysieke documenten aan te pas komen. Een groot deel van de ondernemingen heeft echter naast het digitaal archief nog steeds een papieren archief.
+Digitalisatie van documenten is van cruciaal belang om gemakkelijker de huidige stand van zaken te analyseren en om toekomstige trends te voorspellen. In verschillende sectoren wordt er daarom steeds meer ingezet op digitalisatie van deze papieren archieven \autocite{PekkaLeviaekangas2020}. 
 
-Binnen dit vakgebied wordt er veelal gefocused op het archiveren van documenten met tekst, er bestaat weinig onderzoek naar het archiveren van foto-archieven op basis van machine learning. Aangezien digitale foto's pas populairder werden dan fysieke foto's rond het jaar 2000 (add reference) zijn er ongetwijfeld nog archieven met niet-gedigitaliseerde foto's. Indien foto's wel al gedigitaliseerd werden ontbreekt er in veel gevallen metadata. Met metadata wordt begrepen dat er naast de afbeelding ook extra data wordt bijgehouden. In de context van dit onderzoek wordt met metadata steeds bedoeld dat er per foto woorden worden bijgehouden waarop text-searches uitgevoerd kunnen worden zodat de foto gemakkelijk kan gevonden worden.
+Binnen het vakgebied digitale archiveringen wordt er veelal gefocused op het archiveren van documenten met tekst op basis van OCR (Optical Character Recognition). Met OCR wordt geprobeerd om tekst op afbeeldingen om te zetten naar tekst in string vorm. Aangezien de meeste foto's geen tekst bevatten die nuttig zijn voor het categoriseren van de foto kunnen de OCR technieken niet op dit vakgebied toegepast worden.
 
-Binnen het automatisch labelen van documenten is er door middel van machine learning grote vooruitgang geboekt (add reference). Een belangrijke evolutie is dat engines nu algemeen getrained worden en niet meer specifiek worden opgezet voor specifieke type's afbeeldingen. Deze moderne engines kunnen een breed aantal types afbeeldingen interpreteren en trachten correct te labelen. In dit onderzoek werd gekozen om enkel met machine learning engines te werken die algemeen getraind werden. Binnen deze subset van machine learning engines zijn er 4 grote spelers: Google Vision, AWS Rekognition, Microsoft Azure, IBM Watson. De IBM Watson engine focust zich volledig op face recognition en is daarom niet toepasbaar voor dit onderzoek. Google Vision, AWS Rekognition en Microsoft Azure omvatten alle drie label-detectie functionaliteiten, zijn uitvoerig gedocumenteerd en hebben een gratis tier zolang er onder de 1000 afbeeldingen per maand verwerkt worden. Om de scope beperkt te houden werd er gekozen om enkel Google Vision en AWS Rekognition te gebruiken.
-Dit onderzoek zal aantonen welke engine het meest correct is voor het labelen van dieren foto's, naast correctheid van de voorspellingen zal er gekeken worden welke zekerheidsgraad de engines geven bij juiste en foute voorspellingen. Pricing models worden buiten beschouwing gelaten.
+Digitale foto's werden pas populairder dan fysieke foto's rond het jaar 2000 \autocite{HenryC.LucasJr.2009} - er zijn dus ongewtijfeld ondernemingen die met niet-gedigitaliseerde foto-archieven zitten. Indien foto's wel al gedigitaliseerd werden, voornamelijk via scans, ontbreekt er in veel gevallen metadata. Met metadata wordt begrepen dat er naast de afbeelding ook extra data wordt bijgehouden. In de context van deze Bachelorproef wordt met metadata steeds bedoeld dat er per foto woorden worden bijgehouden waarop text-searches uitgevoerd kunnen worden zodat de foto gemakkelijk kan gevonden worden. Het toevoegen van metadata noemt men ook indexeren.
 
-Omdat de scope foto's nog steeds zeer breed is zal er verder beperkt woren tot foto's van dieren. Foto's van dieren zijn een ideaal onderwerp voor machine learning labeling omdat het een categorie is met duizenden subcagetorien en er is een bijna oneindige bron sample-materiaal beschikbaar.
+Zoals aangegeven kunnen de gebruikelijke OCR technieken niet gebruikt worden voor afbeeldingen, daarom wordt er in dit onderzoek gefocused op het gebruiken van machine learning engines om afbeeldingen te indexeren. Een belangrijke evolutie is dat er nu engines bestaan die algemeen getrained worden en niet meer specifiek worden opgezet voor specifieke type's afbeeldingen. Deze moderne engines kunnen een breed aantal type's afbeeldingen interpreteren en trachten correct te indexeren.
+In dit onderzoek werd bijgevolg gekozen om enkel met machine learning engines te werken die algemeen getraind werden. Binnen deze subset van machine learning engines zijn er 4 grote spelers: Google Vision, AWS Rekognition, Microsoft Azure, IBM Watson. De IBM Watson engine focust zich volledig op face recognition en is daarom niet toepasbaar voor dit onderzoek. Google Vision, AWS Rekognition en Microsoft Azure omvatten alle drie brede indexatie functionaliteiten, zijn uitvoerig gedocumenteerd en hebben een gratis tier zolang er onder de 1000 afbeeldingen per maand verwerkt worden. Om de scope beperkt te houden werd er gekozen om enkel Google Vision en AWS Rekognition te gebruiken.
+Dit onderzoek zal aantonen welke engine het meest correct is voor het indexeren van dieren foto's, naast correctheid van de indexatie zal er gekeken worden welke zekerheidsgraad de engines geven bij juiste en foute voorspellingen. Pricing models worden buiten beschouwing gelaten.
 
+Omdat de scope foto's zonder belangrijke tekst nog steeds zeer breed is zal er verder beperkt woren tot foto's van dieren. Foto's van dieren zijn een ideaal onderwerp voor machine learning indexatie omdat het een categorie is met duidelijk afgebakende subcategorien per diersoort en er een onuitputbare bron gratis sample materiaal beschikbaar is op het internet.
 
 %---------- Stand van zaken ---------------------------------------------------
 
 \section{State-of-the-art}
 \label{sec:state-of-the-art}
 
-Er is weinig wetenschappelijk onderzoek verricht naar de mate van correctheid van image labeling op basis van machine learning modellen. Eerder onderzoek focust zich op het labelen van images op basis van mining van zoekresultaten \autocite{Wang2008} of op het opstellen van grafische user-interfaces voor het labelen van images \autocite{LuisvonAhn2004} and \autocite{JuliaMoehrmann2012}.
+Er is weinig wetenschappelijk onderzoek verricht naar de mate van correctheid van indexatie van afbeeldingen op basis van machine learning engines. Eerder onderzoek focust zich op het labelen van images op basis van mining van zoekresultaten \autocite{Wang2008} of op het opstellen van grafische user-interfaces voor het indexeren van images \autocite{LuisvonAhn2004} en \autocite{JuliaMoehrmann2012}.
 
+Het feit dat er weinig onderzoek is kan een aanwijzing zijn hoe indexatie binnen digital archiving momenteel gebeurt: gebruikers kijken iedere foto manueel na en voegen metadata toe of laten de afbeeldingen zonder metadata (en dus nagenoeg onvindbaar) in de archieven staan.
+Ook foto's van wildcamera's, belangrijk voor het beheer van het dierenbestand, worden case by case bekeken en wordt er manueel metadata toegevoegd.
 
-
+Manueel metadata toevoegen, of ook manueel indexeren, is tijdrovend en weinig intellectueel uitdagend werk - uit dit onderzoek zal tenminste deels duidelijk worden of machine learning engines gebruikt zouden kunnen worden om op automatische wijze afbeeldingen te indexeren.
 
 
 % Voor literatuurverwijzingen zijn er twee belangrijke commando's:
@@ -36,7 +40,7 @@ Er is weinig wetenschappelijk onderzoek verricht naar de mate van correctheid va
 \section{Methodologie}
 \label{sec:methodologie}
 
-Het vergelijkend onderzoek tussen deze twee engines wordt opgedeeld in drie onderdelen:
+Het vergelijkend onderzoek tussen Google Vision en AWS Rekognition wordt opgedeeld in drie onderdelen:
 
 \begin{enumerate}
     \item Opstellen van test-data
@@ -47,31 +51,41 @@ Het vergelijkend onderzoek tussen deze twee engines wordt opgedeeld in drie onde
 1. Opstellen van test-data
 \linebreak
 Op basis van Google image searches wordt er een set van afbeeldingen gecreëerd, deze afbeeldingen worden in subcategorieen onderverdeeld naar soort dier.
+Opslaan van de afbeeldingen gebeurt eerst lokaal, vervolgens worden de afbeeldingen per engine klaar gezet in zip format voor Google Vision en een AWS S3 Bucket voor AWS Rekognition.
 
-2. Versturen an de test-data naar de engines
+2. Versturen van de test-data naar de engines
 \linebreak
-Zowel bij Google Vision als bij AWS Rekognition moet er eerst een account aangemaakt worden voor de image labeling gebruikt kan worden. Beide engines laten het toe om minstens 1000 afbeeldingen gratis te verwerken. De engines zijn bereikbaar via een API, die geïntegreerd kan worden met respectievelijk de .Net Google Cloud Vision Package en de AWS SDK.
+Zowel bij Google Vision als bij AWS Rekognition moet er eerst een account aangemaakt worden voor de image labeling gebruikt kan worden. Beide engines laten het toe om minstens 1000 afbeeldingen  per maandgratis te verwerken. De engines zijn bereikbaar via een API, die geïntegreerd kan worden met respectievelijk de .Net Google Cloud Vision Package en de AWS SDK.
 
 Via een .Net console project zullen beide SDK's geintegreerd worden. De test-data wordt naar beide API's gestuurd, de resultaten worden opgevangen en in een csv file weggeschreven.
 
 3. Analyseren van het resultaat
 \linebreak
-Op basis van deze de csv file wordt er een analyse gemaakt over de kwaliteit van beide engines.
+Op basis van de csv file's wordt er een brede analyse gemaakt van de resultaten voor beide engines.
 
-Het is belangrijk om bij het analyseren van de resultaten niet alleen naar de succesvolle resultaten te bekijken maar ook te checken hoeveel resultaten er false positives zijn. False positivies zijn afbeedlingen waarvan de engine zeker is dat het resultaat juist is maar waarvan het resultaat verkeerd is.
-De false postiive analyse zal gebeuren op basis van de zekerheidsgraad of confidence level die ook meegestuurd wordt door de API's.
+Het is belangrijk om bij het analyseren van de resultaten niet alleen naar de correctheid te kijken van de indexatie maar ook te checken hoeveel resultaten er false positives zijn. False positivies zijn afbeeldingen waarvan de engine zeker is dat de indexatie correct is maar waarvan de indexatie verkeerd is.
+De false postiive analyse zal gebeuren op basis van de zekerheidsgraad of confidence level die per indexatie ook meegestuurd wordt door de API's. De zekerheidgraad wordt uitgedrukt in een percentuele waarde. We zullen de zekerheidsgraden indelen in 3 categoriën:
+
+\begin{enumerate}
+    \item Onder 60 percent zekerheid: Lage zekerheidsgraad
+    \item Tussen 60 en 80 percent: Gemiddelde zekerheidsgraad
+    \item Boven 80 percent: Hoge zekerheidsgraad
+\end{enumerate}
 
 Een laatste factor die zal meetellen in de analyse is de snelheid van verwerken, hoe snel konden de engines de afbeeldingen verwerken en een resultaat sturen. In dit onderzoek met beperkte data zal de snelheid van verwerking geen rol spelen, maar naar schaalbaarheid is dit een belangrijke factor.
+Snelheid zal bijgehouden worden tot op de milliseconde, om te vermijden dat een tijdelijke storing voor oneerlijke vertraging zorgt zal het internet tijdens verwerking steeds via ethernet verbonden zijn en wordt het gemiddelde berekend op 2 test-runs van dezelfde data.
 
 %---------- Verwachte resultaten ----------------------------------------------
 \section{Verwachte resultaten}
 \label{sec:verwachte_resultaten}
-De engines worden geacht om met een grote mate van zekerheid, minstens 80 percent, een correct label toe te herkennen voor de afbeelding. Een bepalende factor zal waarschijnlijk de hoeveelheid ruis zijn die op de afbeelding aanwezig is. Met ruis worden achtegrond-figuren of voorwerpen bedoeld die de herkenning verstoren.
-Er wordt verwacht dat de verwerkingssnelheid heel hoog zal liggen, met verwerkingstijdens per afbeeldingen <1 seconde.
+De engines worden geacht om afbeeldingen van dieren ten minstens 80 percent correct kunnen indexeren met een hoge zekerheidsgraad. Een bepalende factor voor correcte indexatie zal waarschijnlijk de hoeveelheid ruis zijn die op de afbeelding aanwezig is. Met ruis worden achtegrond-figuren of voorwerpen bedoeld die de herkenning verstoren.
+Er wordt verwacht dat de gemiddelde verwerkingssnelheid per afbeelding minder dan 1 seconde zal zijn beide engines.
+Bij afbeeldingen waarvan de zekerheidsgraag laag is wordt er verwacht dat er 50 percent afbeeldingen een false positive zullen opleveren.
 
 %---------- Verwachte conclusies ----------------------------------------------
 \section{Verwachte conclusies}
 \label{sec:verwachte_conclusies}
-Aangezien beide engines door grote bedrijven worden gebacked met veel financiele middelen wordt er niet verwacht dat er een groot verschil zal zijn tussen het resultaat in de image processing. Vermoedelijk zal 1 engine beter zijn in een bepaald deelprobleem en zal de andere engine dan weer beter zijn in een ander deelprobleem.
-Aangezien er geen wetenschappelijk onderzoek te vinden is die beide engines met elkaar vergelijkt zal er gewacht moet worden op het resultaat van het onderzoek om de conclusie beter te definieren.
+Er wordt niet verwacht dat er een significant verschil zal zijn tussen het resultaat van indexatie bij beide engines. Vermoedelijk zal 1 engine beter zijn in een bepaald deelprobleem en zal de andere engine dan weer beter zijn in een ander deelprobleem.
+Aangezien er geen wetenschappelijk onderzoek te vinden is die beide engines met elkaar vergelijkt zal er gewacht moet worden op het resultaat van dit onderzoek om de conclusie beter te definieren.
+Uit de vergelijkende studie zal duidelijk worden welke engine er het beste gebruikt kan worden voor indexeren van foto-archieven. Indien er een hoge zekerheidsgraad is met weinig false positives zal de conclusie getrokken worden dat machine learning engines een nuttige tool kunnen zijn voor archivarissen.
 
