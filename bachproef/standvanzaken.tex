@@ -6,12 +6,99 @@
 % bijzonder aan wat de link is met het vorige en volgende hoofdstuk.
 
 % Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
+We bespreken eerst kort wat machine learning inhoudt en wat de belangrijskte stromingen zijn. Vervolgens gaan we dieper in op het classificeren van afbeeldingen, wat houdt deze term in en hoe wordt dit uitgevoerd door mens en machine.
 
-Dit hoofdstuk bevat je literatuurstudie. De inhoud gaat verder op de inleiding, maar zal het onderwerp van de bachelorproef *diepgaand* uitspitten. De bedoeling is dat de lezer na lezing van dit hoofdstuk helemaal op de hoogte is van de huidige stand van zaken (state-of-the-art) in het onderzoeksdomein. Iemand die niet vertrouwd is met het onderwerp, weet nu voldoende om de rest van het verhaal te kunnen volgen, zonder dat die er nog andere informatie moet over opzoeken \autocite{Pollefliet2011}.
+\section{\IfLanguageName{dutch}{Machine learning}{machine learning}}
+\label{sec:machine-learning}
+Machine learning kan samengevat worden als...
 
+Machine learning algoritmes kunnen in het algmeen opgedeeld worden in 3 type's: supervised learning, unsupervised learning, reinforcement learning.
+
+\subsection{\IfLanguageName{dutch}{Supervised learning}{Supervised learning}}
+\label{sec:supervised-learning}
+...
+\subsection{\IfLanguageName{dutch}{Supervised learning}{Unsupervised learning}}
+\label{sec:unsupervised-learning}
+...
+\subsection{\IfLanguageName{dutch}{Supervised learning}{Reinforcement learning}}
+\label{sec:reinforcement-learning}
+...
+
+\section{\IfLanguageName{dutch}{Classificeren van afbeeldingen}{Image classification}}
+\label{sec:classificeren-van-afbeeldingen}
+Voor we dieper ingaan op het classificeren van afbeeldingen, proberen we te begrijpen hoe een mens op natuurlijke wijze de wereld ziet en categoriseert. 
+
+- Improve writing, add references -
+Bijoorbeeld hoe een kind de wereld leert 'classificeren', wanneer een peuter opgroeit leert hij praten door de klanken na te bootsen rond hem, vervolgens leert hij bepaalde klanken met bepaalde fenomenen rond zich te identificeren. Bij het ouder worden zal een kind steeds beter worden in het herkennen van bepaalde begrippen door middel van trial and error. Het is een vorm van reinforcement learning. Een peuter leert het woordje bus, wanneer een peuter naar een bus wijst en 'bus' zegt zullen de ouders positief reageren. Wanneer het kind echter een vergissing maakt en naar een vrachtwagen wijst zullen de ouders het kind verbeteren. Op deze manier leren we vanop jonge leeftijd de wereld rond ons 'classificeren'.
+
+Classificeren van afbeeldingen gebeurt op soortgelijke wijze. Aan de basis van de classificatie liggen altijd labgels. Labels zijn objecten die herkend worden op de afbeeldingen. Enkele voorbeelden zijn een fiets, gezicht, kat,... Aan iedere afbeeldingen kan 1 of meerdere labels worden toegewezen. Deze labels worden niet in afbeelding zelf opgeslaan maar typisch in een bijhorend metadata bestand; wanneer er metadata voor een afbeelding beschikbaar is spreekt men van een verrijkte afbeelding. Deze labels kunnen dan bijvoorbeeld gebruikt worden om de foto's zoekbaar te maken, men kan in een zoekbalk 'fiets' ingeven en men krijgt alle foto's waaraan een label 'fiets' hangt te zien.
+
+Bij het labelen van afbeeldingen kan men ook proberen de tekst die op de afbeelding staat te lezen en deze toe te voegen aan de metadata, opnieuw wordt op deze manier de afbeelding verrijkt. Denk bijvoorbeeld aan een foto van een politiekantoor waar er 'Politie' op het gebouw staat geschreven.
+
+\subsection{\IfLanguageName{dutch}{Manuele classificatie}{Manual classification}}
+\label{sec:manuele-classificatie}
+Het manueel classificeren van afbeeldingen is een tijdrovend proces. Iedere afbeelding moet door een persoon geopend worden, deze persoon bekijkt de afbeelding en voegt manueel labels toe aan de metadata van de afbeelding. Men kan ook proberen om eventuele tekst op de afbeelding te lezen en deze aan de metadata toe te voegen.
+
+Er zijn verschillende technieken en programma's die mensen kunnen helpen bij het manueel classificeren van afbeeldingen... (add references to articles from voorstel)
+
+Manueel geclassificeerde datasets liggen steeds aan de basis van computergestuurde classificatie-algoritmes.
+
+\subsection{\IfLanguageName{dutch}{Automatiche classificatie}{Automatic classification}}
+\label{sec:automatic-classification}
+Onder automatische classificatie begrijpen we het toewijzen van labels aan een afbeelding zonder menselijke input. Een computermodel krijgt een afbeelding aangeboden en wijst aan deze afbeelding verschillende labels toe. Aan iedere label zal een zekerheidsgraagd meegegeven worden, uitgedrukt in procent (0% tot 100%).
+
+\subsubsection{\IfLanguageName{dutch}{Computer vision}{Computer vision}}
+\label{sec:computer-vision}
+Computer vision is de stroming binnen machine learning waarbij men tracht menselijk zicht na te bootsen. Computer vision bevindt zich in machine learning binnen supervised learning, op basis van een pregelabelde dataset worden voorspellingen over toekomstige afbeeldingen gemaakt.
+Binnen de supervised learning subset wordt computer vision gedefinieerd als een deep learning model. Deep learning betekent dat er gebruikt wordt gemaakt van een neuraal netwerk met ten minste 3 of meer lagen.
+
+
+
+Nu blijkt dat het maken van afbeeldingen van de wereld de gemakkelijke stap, de moeilijke stap is het herkennen van de inhoud van de afbeelding.
+
+Mensen herkennen afbeeldingen doordat hun ogen het beeld doorgeven anar de visuele cortex die het resultaat intepreteert. -> zie citatie
+Door middel van miljoenen jaren evolutie is ons brein 'getrained' in het herkennen van objecten.
+
+Daarnaast kan iedere persoon terugvallen op persoonlijke herinneringen die het brein getrained hebben, startende van de prille geboorte.
+
+Voor computers is het echter veel moeilijker om te herkennen wat er op een afbeelding staat. Voor een computer ziet een afbeelding er typisch zo uit:
+(add image bitmap) een lijst van integers. De computer weet hoe het deze integers moet omvormen tot een afbeelding, maar heeft hier geen informatie over de effectieve inhoud van de afbeelding.
+De kunst van computer te leren hoe ze een afbeelding kunnen intepreteren heet computer vision. 
+Het belangrijkste dat computer vision nodig heeft is context. Net zoals bij een menselijk brein is context de bepalende factor voor het herkennen van afbeeldingen.
+Op basis van machine learning worden er modellen opgezet die een computer context kunnen verschaffen bij de lange lijst nummers.
+Wanneer men genoeg data verschaft aan algortime zal de computer op basis van deze context kunnen bepalen wat er op een afbeelding staat. zo bijvorbeeld kunnen we beginnen met foto's van tijgers en katten met tijgerpatroon. De computer zal via de context na verloop van tijd eigenschappen herkennen die enkel bij tijgers of katten voorkomen en zo met een hoge accuraatheid voorspellingen kunnen maken. Sommige afbeeldingen zijn voor een mens moeilijk te onderscheiden, bijvoorbeeld wanneer men enkel de strepen van een dier te zien krijgt. Voor de computer however heeft op basis van data in het verleden al lang uitgemaakt hoe groot de strepen zijn per diersoort en kan daarom wel gemakkelijk herkennen welk dier dit is.
+
+Bij  het labelen van afbeeldingen kan men ook Optical Character Recognition (OCR) uitvoeren. Deze OCR engines zullen proberen tekst te herkennen op de afbeelding. Deze tekst kan dan ook gebruikt worden om afbeelding te classificeren, denk bijvoorbeeld aan een politiekantoor waar er 'politie' op het gebouw staat geschreven. Opnieuw kan men de afbeelding verder verrijken door de OCR data aan de metadata toe te voegen.
+
+\subsubsection{\IfLanguageName{dutch}{Convolutional neural network}{Convolutional neural network}}
+\label{sec:convolutional-neural-network}
+Hoe werkt dit algrotime? Convolutional neural network of CNN
+CNN werkt door afbeeldingen op te delen in kleinere groepjes pixels genaamd filters
+Een CNN zal deze filters vergelijken met patronen die het reeds in de gelabelde trainingsdata heeft en zal beginnen met een afbeelding op te delen in kleinere stukjes. 
+In de eerste laag van de CNN zal het algoritme grove verschillen herkennen, bijvoorbeeld randen.
+Hoe dieper het CNN gaat zal het uiteindelijk beginnen bepaalde objecten beginnen herkennen, bijvoorbeeld dieren of gezichten.
+
+Het CNN zal beginnen met randomized filterwaardes en deze afchecken tegen de gelablede trainingsdata. Het afchecken geeft aan het CNN een bepaalde error-waarde (ofwel loss function) terug, aka hoe goed werkt de voorspelling. Op basis van deze foutwaardes zal het algoritme bij iedere iteratie de filtervalues updaten en begint opnieuw aan het proces. Idealiter zal iedere iteratie een iets grotere accuraatheid hebben.
+
+Voorbeeld de foto van een kat zou hij verschillende zaken kunnen herkennen:
+- een oor
+- Vacht
+- een oog
+- een poot
+
+Het probleem met dit soort modellen is dat men zeer grote aantallen data nodig heeft (>miljarden afbeeldingen) voor men ook maar in de buurt kan komen van de capaciteiten van het menselijk zicht. Bijvoorbeeld als een model getrained wordt met een afbeelding van een eend en het krijgt slechts 1 afbeelding van een eend; Dan zal het model ook de achtergrondkleur en belichting als essentiele informatie van de foto beschouwen. Wanneer men een afbeelding van een andere kleur eend met andere belichting aanbiedt, zal het model geen idee hebben dat dit ook een eend is. De enige manier om dit probleem op te lossen is door grote hoeveelheden verschillende foto's van eenden in de gelabelde dataset te steken met verschillende achtergronden, lichtinvallen, kleuren,... Al deze afbeeldingen moeten correct gelabeld zijn.
+
+Na miljoenen jaren natuurlijke evolutie zijn we nu op een interessant punt waarbij computers stilletjesaan de menselijke herkenningsskills kunnen matchen. In de toekomst zal hoogstwaarschijnlijk computer vision accurater worden dan human vision.
+
+\subsubsection{\IfLanguageName{dutch}{Recurrent neural network}{Recurrent neural network}}
+\label{sec:recurrent-neural-network}
+Wanneer men videobeelden wilt analyseren kan men in essentie iedere frame nemen en gewoon analyseren met CNN zoals bij een afbeelding. Het probleem hierbij is echter dat iedere afbeelding op zich wordt geanalyseerd en dat het CNN geen weet heeft van de relatie tussen de vorige en de volgende frames. Hierdoor kan belangrijke context-informatie verloren geraken die gebruikt kan (en moet) worden om correcte voorspellingen te maken.
+Om dit probleem op te lossen feed men de output van de cnn in een 'temporally sensitive model' ofwel een Recurrent Neural Network of RNN.
+
+In tegenstelling to CNN kan RNN informatie onthouden over de vorige reeds geidentificeerd pixels en dit gebruiken bij het maken van toekomstige beslissingen.
+
+- to delete
 Je verwijst bij elke bewering die je doet, vakterm die je introduceert, enz. naar je bronnen. In \LaTeX{} kan dat met het commando \texttt{$\backslash${textcite\{\}}} of \texttt{$\backslash${autocite\{\}}}. Als argument van het commando geef je de ``sleutel'' van een ``record'' in een bibliografische databank in het Bib\LaTeX{}-formaat (een tekstbestand). Als je expliciet naar de auteur verwijst in de zin, gebruik je \texttt{$\backslash${}textcite\{\}}.
 Soms wil je de auteur niet expliciet vernoemen, dan gebruik je \texttt{$\backslash${}autocite\{\}}. In de volgende paragraaf een voorbeeld van elk.
 
 \textcite{Knuth1998} schreef een van de standaardwerken over sorteer- en zoekalgoritmen. Experten zijn het erover eens dat cloud computing een interessante opportuniteit vormen, zowel voor gebruikers als voor dienstverleners op vlak van informatietechnologie~\autocite{Creeger2009}.
-
-\lipsum[7-20]
