@@ -6,42 +6,51 @@
 % bijzonder aan wat de link is met het vorige en volgende hoofdstuk.
 
 % Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
-In dit hoofdstuk wordt besproken wat machine learning inhoudt en wat de belangrijskte stromingen zijn. Vervolgens wordt er dieper ingegaan op het classificeren van afbeeldingen; wat houdt deze term in en hoe wordt dit uitgevoerd door mens en machine. Aangezien dit onderzoek zich focust op het nut van machine learning modellen voor het archiveren van foto's komen ook de belangrijkste stromingen in archiveren naar voor.
+In dit hoofdstuk wordt besproken wat machine learning inhoudt en wat de belangrijskte stromingen zijn. Vervolgens wordt er dieper ingegaan op het classificeren van afbeeldingen; wat houdt deze term in en hoe wordt dit uitgevoerd door mens en machine. Aangezien dit onderzoek zich focust op het nut van machine learning modellen voor het archiveren van foto's komen ook de belangrijkste stromingen in archiveren van foto's naar voor.
 
 \section{\IfLanguageName{dutch}{Machine learning}{machine learning}}
 \label{sec:machine-learning}
-Machine learning kan samengevat worden als...
+Machine learning is een bepaalde soort computer algoritme dat ontworpen werd om menselijke intelligentie te emuleren door bij te leren uit de directe omgeving \autocite{ElNaqa2015}. Op basis van vroegere ervaringen zal het algoritme trachten om efficientie te verhogen of correcte voorspellingen te maken. In deze context wordt ervaring gedefinieerd als informatie die voor het systeem beschikbaar is, typisch in de vorm van elektronische data. Deze elektronische data kan verschillende vormen aannemen, bijvoorbeed datasets gelabeld door mensen of data gegeneerd door andere machines op basis van hun contact met de buitenwereld. De hoeveelheid en kwaliteit van de data zal steeds cruciaal zijn voor de performantie van het machine learning algoritme \autocite{Mohri2018}.
+
+Machine learning algoritmes bieden computer de mogelijkheid om te leren zonder expliciet geprogrammeerd te zijn \autocite{DeVreese2017}. De problemen waarvoor machine learning meestal gebruikt wordt zijn te complex om via klassieke programmeertechnieken aan te pakken. Aangezien machine learning slechts een techniek is waarmee men tracht complexe problemen op te lossen werd het succesvol gebruikt in uiteenlopende onderzoeksvelden zoals ruimtevaart, statistiek, biomedica en computer vision.
 
 Machine learning algoritmes kunnen in het algmeen opgedeeld worden in 3 type's: supervised learning, unsupervised learning, reinforcement learning.
 
 \subsection{\IfLanguageName{dutch}{Supervised learning}{Supervised learning}}
 \label{sec:supervised-learning}
-...
+De belangrijskte karakteristiek van supervised learning is dat het machine learning algoritme een vooraf gelabelde trainingsdataset ter beschikking heeft. Supervised learning zal op basis van deze trainingsdataset trachten, door middel van inductie, modellen op te bouwen die gebruikt kunnen worden om andere ongelabelde datasets te classificeren. Achteraf kan dan gecontroleerd worden hoeveel percent van de nieuwe labels correct werd gevonden en hoe zeker het model was van deze voorspellingen. Zoals de naam van het model aangeeft is er een vorm van een 'supervisor' nodig die het model toont welke labels met welke ervaringen uit de trainingsdata moeten geassocieerd worden \autocite{Cunningham2008}. 
+
+Een voorbeeld van supervised learning is hoe Netflix nieuwe content aan de users voorstelt. Het algoritme start van een gelabelde dataset met daarin de ervaringen van de gebruiker, op basis van deze ervaringen zal het model voorspellingen over nieuwe content maken.
+
 \subsection{\IfLanguageName{dutch}{Unsupervised learning}{Unsupervised learning}}
 \label{sec:unsupervised-learning}
-...
+In tegenstelling tot supervised learning wordt er bij unsupervised learning vertrokken van een ongelabelde dataset. Het doel is dat het algoritme deze ongelabelde dataset zal intepreteren en een interne representatie van de 'wereld' - de 'wereld' is alle informatie binnen de dataset - zal opbouwen. Een unsupervised learning model zal proberen een diepe kennis van de wereld op te bouwen aan de hand van complexe patroonherkenning \autocite{Hinton1999}. Op basis van deze diepere kennis zal het algoritme de data in verschillende clusters onderverdelen. Analyse van deze clusters kan dan leiden tot het labellen of classificeren van de ongelabelde dataset.
+
+Unsupervised learning wordt in verschillende bedrijfstakken actief toegepast, Google News gebruikt bijvoorbeeld unsupervised learning om nieuwsartikelen rond hetzelfde nieuwsfeit automatisch te clusteren en op een georganiseerde manier aan de gebruiker aan te bieden.
+
 \subsection{\IfLanguageName{dutch}{Reinforcement learning}{Reinforcement learning}}
 \label{sec:reinforcement-learning}
-...
+Reinforcement learning is een machine learning algoritme dat steeds zal zoeken naar een zo hoog mogelijke beloning, uitgedrukt in een numerieke waarde. Het algoritme krijgt op voorhand geen uitleg wat goed of fout is maar moet zelf ontdekken welke acties leiden tot de grootst mogelijke beloning \autocite{Sutton2018}. Uit het iteratief uitvoeren van dezelfde opdracht en ontvangen van een beloning zal het algoritme een duidelijk beeld krijgen welke acties de grootste beloning opleveren. Het zal steeds een balans moeten houden tussen exploratief onderzoeken en in de diepte onderzoeken van reeds gevonden oplossingen. 
+
+Reinforcement learning vindt toepassingen in verschillende sectoren zoals autonoom auto-rijden, handelen op de aandelenmarkt en gaming. Reinforcement learning sluit inherent dicht aan bij gaming dat met dezelfde soort trial-and-error beloningssystemen werkt, bijgevolg werd er reeds veel onderzoek verricht naar het gebruik van reinforcement learning om spelletjes te spelen. Een voorbeeld uit 2015 is een wedstrijd van het complexe bordspel Go tussen wereldkampioen Fan Hui en AlphaGo. AlphaGo is een algoritme ontwikkeld door Google, gebaseerd op het reinforcement learning principe. Fan Hui verloor de match met 1-4, het was de eerste keer dat een computer-gestuurd programma een Go wereldkampioen versloeg.
 
 \section{\IfLanguageName{dutch}{Classificeren van afbeeldingen}{Image classification}}
 \label{sec:classificeren-van-afbeeldingen}
-Voor we dieper ingaan op het classificeren van afbeeldingen, proberen we te begrijpen hoe een mens op natuurlijke wijze de wereld ziet en categoriseert. 
+In deze stand van zaken werd beknopt besproken wat machine learning is en wat de belangrijkste onderdelen zijn. De focus van deze bachelorproef is hoe deze machine learning algoritmes toegepast kunnen worden om afbeeldingen te classificeren. Het is dan ook belangrijk om verder te bespreken wat er bedoelt wordt met classificeren van afbeeldingen en wat de belangrijskte onderdelen zijn.
 
-- Improve writing, add references -
-Bijoorbeeld hoe een kind de wereld leert 'classificeren', wanneer een peuter opgroeit leert hij praten door de klanken na te bootsen rond hem, vervolgens leert hij bepaalde klanken met bepaalde fenomenen rond zich te identificeren. Bij het ouder worden zal een kind steeds beter worden in het herkennen van bepaalde begrippen door middel van trial and error. Het is een vorm van reinforcement learning. Een peuter leert het woordje bus, wanneer een peuter naar een bus wijst en 'bus' zegt zullen de ouders positief reageren. Wanneer het kind echter een vergissing maakt en naar een vrachtwagen wijst zullen de ouders het kind verbeteren. Op deze manier leren we vanop jonge leeftijd de wereld rond ons 'classificeren'.
+Het classificeren van afbeeldingen kan gedefinieerd worden als het groeperen van afbeeldingen in semantisch betekenisvolle categorien op basis van onderdelen van de afbeeldingen \autocite{VAILAYA19981921}. Deze ''semantisch betekenisvolle categorien'' worden ook labels genoemd, voorbeelden van labels zijn 'fiets', 'hond', 'boom'. Het correct aanduiden van labels is een belangrijk probleem wanneer men grote datasets van afbeeldingen heeft en deze zoekbaar wilt maken, bijvoorbeeld foto-archieven. Deze labels worden typisch niet in de afbeelding zelf opgeslaan maar in een bijhorend metadata bestand; wanneer er metadata voor een afbeelding beschikbaar is spreekt men van een verrijkte afbeelding.
 
-Classificeren van afbeeldingen gebeurt op soortgelijke wijze. Aan de basis van de classificatie liggen altijd labels. Labels zijn objecten die herkend worden op de afbeeldingen. Enkele voorbeelden zijn een fiets, gezicht, kat,... Aan iedere afbeeldingen kan 1 of meerdere labels worden toegewezen. Deze labels worden niet in afbeelding zelf opgeslaan maar typisch in een bijhorend metadata bestand; wanneer er metadata voor een afbeelding beschikbaar is spreekt men van een verrijkte afbeelding. Deze labels kunnen dan bijvoorbeeld gebruikt worden om de foto's zoekbaar te maken, men kan in een zoekbalk 'fiets' ingeven en men krijgt alle foto's waaraan een label 'fiets' hangt te zien.
+Naast het zoeken van labels voor een afbeelding kan men ook trachten eventuele tekst op een afbeelding te lezen en deze toe te voegen aan de metadata, opnieuw wordt op deze manier de afbeelding verrijkt. Bijvoorbeeld het woord 'Politie' bij een foto van een politie-kantoor.
 
-Bij het labelen van afbeeldingen kan men ook proberen de tekst die op de afbeelding staat te lezen en deze toe te voegen aan de metadata, opnieuw wordt op deze manier de afbeelding verrijkt. Denk bijvoorbeeld aan een foto van een politiekantoor waar er 'Politie' op het gebouw staat geschreven.
+In de volgende secties worden er verschillende manieren besproken om afbeeldingen te classificeren.
+
+%Een deel van het opgroeien is patronen herkennen in de wereld. Een mens opgroeit leert hij praten door de klanken na te bootsen rond hem, vervolgens leert hij bepaalde klanken met bepaalde fenomenen rond zich te identificeren. Bij het ouder worden zal een kind steeds beter worden in het herkennen van bepaalde begrippen door middel van trial and error. Het is een vorm van reinforcement learning. Een peuter leert het woordje bus, wanneer een peuter naar een bus wijst en 'bus' zegt zullen de ouders positief reageren. Wanneer het kind echter een vergissing maakt en naar een vrachtwagen wijst zullen de ouders het kind verbeteren. Op deze manier leren we vanop jonge leeftijd de wereld rond ons 'classificeren'.
 
 \subsection{\IfLanguageName{dutch}{Manuele classificatie}{Manual classification}}
 \label{sec:manuele-classificatie}
-Het manueel classificeren van afbeeldingen is een tijdrovend proces. Iedere afbeelding moet door een persoon geopend worden, deze persoon bekijkt de afbeelding en voegt manueel labels toe aan de metadata van de afbeelding. Men kan ook proberen om eventuele tekst op de afbeelding te lezen en deze aan de metadata toe te voegen.
-
-Er zijn verschillende technieken en programma's die mensen kunnen helpen bij het manueel classificeren van afbeeldingen... (add references to articles from voorstel)
-
-Manueel geclassificeerde datasets liggen steeds aan de basis van computergestuurde classificatie-algoritmes.
+%Het manueel classificeren van afbeeldingen is een tijdrovend proces. Iedere afbeelding moet door een persoon geopend worden, deze persoon bekijkt de afbeelding en verrijkt de afbeelding aan de hand van labels. Voor het classificeren van miljoenen of miljarden afbeeldingen is manuele classificatie te tijdsintensief en wordt er naar automatische opties gezocht. Automatische of computergestuurde modellen hebben echter steeds manueel gelabelde datasets als trainingsmateriaal dus is het cruciaal dat de kwaliteit van deze manueel geclassificeerde datasets hoog is \autocite{JuliaMoehrmann2012}.
+%
+%Er werd reeds veel onderzoek en ontwikkeling verricht naar hoe men mensen kan helpen afbeeldingen op een snelle en correcte manier te labelen. Bijvoorbeeld via geavanceerde interfaces \autocite{JuliaMoehrmann2012} of gamification \autocite{LuisvonAhn2004}. Een voorbeeld van manuele classificatie is het invullen van een reCAPTCHA, de manuele input van deze beveiligingstechnologie wordt door Google gebruikt om machine learning modellen te trainen \autocite{Google2021}.
 
 \subsection{\IfLanguageName{dutch}{Automatiche classificatie}{Automatic classification}}
 \label{sec:automatic-classification}
