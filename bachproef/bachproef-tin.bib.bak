@@ -62,4 +62,51 @@
   url          = {https://www.sciencedirect.com/science/article/abs/pii/S003132039800079X},
 }
 
+@Book{Jaehne2000,
+  author    = {Jähne, Bernd and Haubecker, Horst},
+  date      = {2000},
+  title     = {Computer Vision and Applications},
+  publisher = {Academic Press},
+  url       = {https://books.google.be/books?id=lcSccjdqmpkC&lpg=PP2&ots=xOH7paPyAH&dq=computer vision definition&lr&hl=nl&pg=PR4#v=onepage&q=computer vision definition&f=false},
+}
+
+@Article{Khan2020,
+  author       = {Khan, Asharul Islam and Al-Habsi, Salim},
+  date         = {2020},
+  journaltitle = {Procedia Computer Science},
+  title        = {Machine Learning in Computer Vision},
+  url          = {https://www.sciencedirect.com/science/article/pii/S1877050920308218},
+}
+
+@Article{Breuel2013,
+  author       = {Breuel, Thomas and Ul-Hasan, Adnan and Al-Azawi, Mayce and Shafait, Faisal},
+  date         = {08-2013},
+  journaltitle = {International Conference on Document Analysis and Recognition},
+  title        = {High-Performance OCR for Printed English and Fraktur Using LSTM Networks},
+  url          = {https://ieeexplore.ieee.org/abstract/document/6628705},
+}
+
+@Article{Scheirer2014,
+  author       = {Scheirer, Walter and Anthony, Samuel and Nakayama, Ken and Cox, David},
+  date         = {2014},
+  journaltitle = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  title        = {Perceptual Annotation: Measuring Human Vision to Improve Computer Vision},
+  url          = {https://ieeexplore.ieee.org/abstract/document/6701391},
+}
+
+@Article{Albawi2017,
+  author       = {Albawi, Saad and Mohammed, Tareq and Al-Zawi, Saad},
+  date         = {2017},
+  journaltitle = {2017 International Conference on Engineering and Technology (ICET)},
+  title        = {Understanding of a convolutional neural network},
+  url          = {https://ieeexplore.ieee.org/abstract/document/8308186},
+}
+
+@Article{Chen2014,
+  author       = {Chen, Guobin and Han, Tony and He, Zhihai and Kays, Roland and Forrester, Tavis},
+  date         = {2014},
+  journaltitle = {International Conference on Image Processing (ICIP)},
+  title        = {https://ieeexplore.ieee.org/abstract/document/7025172},
+}
+
 @Comment{jabref-meta: databaseType:biblatex;}
