@@ -5,26 +5,43 @@
 \chapter{\IfLanguageName{dutch}{Inleiding}{Introduction}}
 \label{ch:inleiding}
 
-Waarom dit onderwerp, waarom kan het interessant zijn
+Machine learning en AI (Artificiële Intelligentie) heeft het laatste decennium een grote sprong voorwaarts gemaakt. Er wordt al sinds de jaren 50 onderzoek gedaan naar een vorm van AI maar door de noodzaak van complexe setups en benodigde compute power bleef AI eerder binnen de academische wereld en niet de bedrijfswereld. Sinds de opkomst van cloud computing wordt er echter een verandering waargenomen, steeds meer bedrijven kiezen ieder jaar voor de implementatie van een vorm van AI. Volgens een onderzoek gebaseerd op data van de US Census Bureau zou in 2018 3,5 percent van alle bedrijven in de Verenigde Staten AI reeds gebruiken of in testing hebben \autocite{Zolas2020}. Volgens de auteurs van dezelfde paper wordt er voorspeld dat AI een steeds grotere penetratie zal hebben in diverse bedrijfstakken.
 
 \section{\IfLanguageName{dutch}{Probleemstelling}{Problem Statement}}
 \label{sec:probleemstelling}
+Op basis van deze evolutie lijkt het interessant om te onderzoeken of AI en machine learning kan toegepast worden op een concrete business case, met als belangrijskte doel dat de oplossing gemakkelijk gebruikt kan worden. Volgens \textcite{Zolas2020} gebruiken vooral grote bedrijven AI, het lijkt daarom interessant om te onderzoeken of ook een gemiddeld bedrijf gebruik kan maken van AI voor het oplossen van een concrete business case. Essentieel bij deze vraag is ease of use (of gemak van gebruik), een gemiddeld bedrijf moet de middelen en technische kennis in huis hebben vooropgesteld aan het gebruik van de AI. 
 
-Waarom is het nuttig => stad Gent => hebben vaak niet de kennis of resources om zelf machinelearning modellen op te zetten.
+Bij het verfijnen van de onderzoeksvraag werd er gekozen om te focussen op het archiveren van foto's. Er zijn veel organisaties die grote foto-archieven hebben, zowel fysiek als digitaal, waarop niet gezocht kan worden - we begrijpen dat er geen manier is om via een 'zoek'-functie de foto's op te zoeken of te filteren. Het manueel zoekbaar maken van de foto-archieven is typisch een tijdrovend en vervelend werk, het automatiseren van dit proces zou voor grote winsten kunnen zorgen.
 
-- needs further clean-up -
-Dit brengt ons bij een belangrijk punt, en de reden dat deze bachelorproef geschreven wordt. Voor de meeste organisatie's is het niet realistisch om ten eerste miljoenen afbeeldingen te verzamelen en manueel te labelen en ten tweede de technische kennis in huis te hebben om dit alles te managen. Daarom geldt bij image-classificatie vaak de regel 'bigger is better', hoe groter de achterliggende dataset, hoe accurater de voorspellingen. 
-Net om die reden zijn er slechts enkele engines beschikbaar die met een grote accuraatheid voorspellingen kunnen maken over algemene foto's.
+Het is belangrijk om op te merken dat foto-archieven een brede noemer is en dat het veel verschillende soorten foto's kan omvatten. Bijvoorbeeld foto's van gebouwen; landschappen; wildcamera's; kunstwerken; gezichten; wetenschapsonderwerpen, ...
+
+Uit de probleemstelling volgen afgelijnde 3 doelen:
+\begin{itemize}
+    \item Foto's zoekbaar maken door middel van AI
+    \item De oplossing moet gemakkelijk te gebruiken zijn
+    \item De oplossing moet breed bruikbaar zijn; voor veel verschillende soorten foto-archieven
+\end{itemize}
 
 \section{\IfLanguageName{dutch}{Onderzoeksvraag}{Research question}}
 \label{sec:onderzoeksvraag}
+De onderzoeksvraag wordt opgebouwd op basis van de doelstellingen die uit de probleemstelling volgen.
 
-Kunnen pre-trained machine learning engines gebruikt worden voor het archiveren van ongeclassificeerde foto's, zonder dat er technische kennis nodig is.
+Een specifieke tak binnen AI genaamd computer vision kan gebruikt worden om een computer te laten ''zien'' en bepaalde objecten op de foto te herkennen. De gevonden objecten kunnen dan gebruikt worden om de foto's zoekbaar te maken, dit proces heet classificatie.
+
+Om de oplossing gemakkelijk bruikbaar te maken moet er een minimum aan configuratie en opzet nodig zijn bij het gebruik van de AI. Daarom werd er in dit onderzoek gekozen om enkel pre-trained API's te gebruiken. Pre-trained betekent dat het model reeds getrained werd en dat er geen configuratie door de consument moet gebeuren. Het gebruik van API's, in tegenstelling tot het gebruiken van lokale setup, zorgt opnieuwe voor een gemakkelijkere opzet - men kan stellen dat de meeste bedrijven de middelen ter beschikking hebben om te integreren met een API.
+
+Om aan deze 3 doelen te voldoen werd er na inleidend onderzoek gekozen om de API's te gebruiken van de twee grootste spelers in het veld: Google Vision en Amazon AWS Rekognition.
+
+Voor het vergelijken van deze API's is het belangrijk dat er een representatieve data-set gebruikt wordt, na contact met het Stadsarchief van Stad Gent werd er toegestaan om een dataset te gebruiken van de Gentse Beeldbank bestaande uit 30 foto's. De dataset wordt aan beide API's aangeboden en de resultaten worden geanalyseerd.
+
+Er wordt dieper op bovestaande keuzes ingegaan in Hoofdstuk~\ref{ch:methodologie}.
+
+Samengevat komen we tot de onderzoeksvraag: Het nut van pre-trained machine learning API's voor het classificeren van foto-archieven: Een vergelijkende studie tussen Google Vision en AWS Rekognition
 
 \section{\IfLanguageName{dutch}{Onderzoeksdoelstelling}{Research objective}}
 \label{sec:onderzoeksdoelstelling}
 
-Via een proof-of-concept wordt er hopelijk bewezen dat pre-trained machine learning nuttig kan zijn bij het classificeren van foto's.
+Via een proof-of-concept wordt er al dan niet bewezen dat Google Vision en AWS Rekognition nuttig kunnen zijn bij het classificeren van foto-archieven. Uit dit resultaat wordt er een algemene conclusie getrokken rond het gebruik van pre-trained machine learning API's.
 
 \section{\IfLanguageName{dutch}{Opzet van deze bachelorproef}{Structure of this bachelor thesis}}
 \label{sec:opzet-bachelorproef}
@@ -38,6 +55,8 @@ De rest van deze bachelorproef is als volgt opgebouwd:
 In Hoofdstuk~\ref{ch:stand-van-zaken} wordt een overzicht gegeven van de stand van zaken binnen het onderzoeksdomein, op basis van een literatuurstudie.
 
 In Hoofdstuk~\ref{ch:methodologie} wordt de methodologie toegelicht en worden de gebruikte onderzoekstechnieken besproken om een antwoord te kunnen formuleren op de onderzoeksvragen.
+
+In Hoofdstuk~\ref{ch:resultaten} worden de resultaten van het onderzoek vergeleken.
 
 % TODO: Vul hier aan voor je eigen hoofstukken, één of twee zinnen per hoofdstuk
 

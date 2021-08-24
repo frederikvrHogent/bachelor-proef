@@ -13,33 +13,58 @@
 \section{\IfLanguageName{dutch}{Inleiding}{Preface}}
 \label{sec:methodologie-inleiding}
 
-\section{\IfLanguageName{dutch}{Fase 1}{Phase 1}}
-\label{sec:fase-1}
-Voorbereidingswerk
+In it hoofdstuk worden de belangrijkste keuzes besproken en de verbonden technische aspecten. Zoals in de onderzoeksvraag aangegeven zijn volgende 3 doelen steeds in dachte gehouden:
+\begin{itemize}
+    \item Foto's zoekbaar maken door middel van AI
+    \item De oplossing moet gemakkelijk te gebruiken zijn
+    \item De oplossing moet breed bruikbaar zijn; voor veel verschillende soorten foto-archieven
+\end{itemize}
 
-\subsection{\IfLanguageName{dutch}{Keuze van computer vision engines}{Choice of computer vision engines}}
-\label{sec:keuze-van-computer-vision-engines}
-Waarom werd er gekozen voor deze engines, waarom geen andere
-Op welke manier integreren we met de engines en hoe wordt de data aangeboden.
+\section{\IfLanguageName{dutch}{Keuze van computer vision model}{Choice of computer vision model}}
+\label{sec:keuze-van-computer-vision}
+Computer vision is een breed veld binnen machine learning waarbij verschillende technieken gebruikt kunnen worden om classificatie uit te voeren. Na inleidend onderzoek werd duidelijk dat er een beslissing moest gemaakt worden op 3 vlakken, iedere keuze vloeit voort uit de vorige:
+\begin{enumerate}
+    \item Wordt er zelf een model getrained of wordt er gebruikt gemaakt van een pre-trained model
+    \item Specifieke of algemene herkenning
+    \item Welke externe API's worden er gebruikt
+\end{enumerate}
 
-\subsection{\IfLanguageName{dutch}{Data}{Data}}
+\subsection{\IfLanguageName{dutch}{Self-trained versus pre-trained}{Self-trained versus pre-trained}}
+\label{sec:Self-trained-versus-pre-trained}
+Self-trained computer vision modellen worden getrained op basis van data die de gebruiker aan het model aanbiedt, op basis van deze data zal het model proberen kennis op te bouwen om voorspellingen te kunnen maken. Zoals in de stand-van-zaken werd besproken is het bij computer vision belangrijk dat de data kwalitiatief van hoog niveau is en dat er miljoenen afbeeldingen zijn om het model te trainen. Er zijn open datasets beschikbaar die gebruikt kunnen worden om een start te geven aan een self-trained model, de gebruiker haalt dan een pre-gelabelde dataset binnen en gebruikt die als basis voor de training. Het grootste voordeel aan self-trained modellen is dat men een grote mate van controle heeft over de trainingsdata en dat men het model kan tot in detail kan finetunen. 
+
+Pre-trained computer vision modellen werden getrained door een organisatie op basis van grote hoeveelheden kwalitatieve data. Een gebruiker kan met een minimum aan configuratie de modellen aanspreken en voorspellingen ophalen. Aangezien de gebruiker geen invloed heeft op configuratie of training zijn de modellen vaak een 'black box', het is onduidelijk hoe het model voorspellingen maakt. Deze modellen zijn typisch aanspreekbaar via een API maar kunnen ook lokaal uitgevoerd worden.
+
+Voor self-trained modellen is het voorzien van kwalitatieve en kwantitatieve data een te grote initiele investering voor een gemiddeld bedrijf, er kan niet verwacht worden dat een bedrijf zelf miljoenen afbeeldingen labelt in een specifiek format. Ook als er gekozen wordt voor het gebruik van een open dataset moet er te veel configuratie en finetuning gebeuren. Voor dit onderzoek werd er bijgevolg gekozen om enkel pre-trained modellen te gebruiken. Voor een gemiddeld bedrijf is het niet belangrijk om te weten hoe de voorspelling precies gebeurt, zolang de voorspellingen accuraat zijn. Het integreren met de pre-trained API's is een technische taak die achter een simpele front-end kan worden verborgen.
+
+\subsection{\IfLanguageName{dutch}{Specifieke herkenning versus algemene herkenning}{Specific recognition versus general recognition}}
+\label{sec:specific-versus-general}
+De meeste pre-trained modellen zijn gespecialiseerd in 1 bepaalde soort herkenning, bijvoorbeeld emoties lezen van gezichten; herkennen van planten; gezichtsherkenning. Naast de specfieke modellen zijn er ook algemene modellen, deze proberen herkenning mogelijk te maken van een zo breed mogelijk aantal onderwerpen: zowel lezen van emoties, als plantherkenning als gezichtsherkenning. De specifieke modellen geven betere resultaten voor de respectievelijke doelen waarvoor ze gemaakt zijn maar zijn hier ook tot beperkt.
+
+Voor deze bachelorproef ligt de focus op foto-archieven, het is de bedoeling dat ongeorganiseerde foto-datasets kunnen worden aangeboden en dat er correct labels voorspeld worden. Aangezien algemene modellen volledig aan sluiten op deze use case worden er voor deze optie gekozen.
+
+\subsection{\IfLanguageName{dutch}{Keuze van externe API's}{Choice of external API's}}
+\label{sec:keuze-externe-API}
+Er zijn verschillende API's online beschikbaar die pre-trained computer vision aanbieden specifiek getrained voor algemene herkenning. Bij computer vision geldt vaak 'bigger is better', hoe groter de achterliggende dataset en hoe groter de compute power tijdens training, hoe beter het resultaat. Op basis van deze insteek en na onderzoek op fora werd er beslist om met de twee grootste spelers verder te gaan, namelijk Google Vision en AWS Rekognition. Om de vergelijking volledig te maken werd er gekozen om ook te integreren met een kleinere speler genaamd imagga.
+
+Alle externe API's voldoen aan volgende kwaliteiten:
+ \begin{itemize}
+     \item Mogelijkheid tot het taggen van afbeeldingen
+     \item Pre-trained, algemene herkenning
+     \item Weinig tot geen configuratie nodig, gemakkelijke integratie
+     \item Uitgebreide documentatie beschikbaar
+     \item Mogelijkheid tot 1000 gratis verwerkingen
+ \end{itemize}
+
+\section{\IfLanguageName{dutch}{Integratie met Computer Vision API's}{Integrating with Computer Vision API's}}
+\label{sec:integratie-met-computer-vision}
+
+\section{\IfLanguageName{dutch}{Scoren van Computer Vision API's}{Scoring of the Computer Vision API's}}
+\label{sec:scoren-van-computer-vision}
+Hoe worden de engines gescored: wat is 'correct', hoe houden we rekening met zekerheidsgraden et al
+
+\section{\IfLanguageName{dutch}{Data}{Data}}
 \label{sec:methodologie-data}
 Welke data wordt er gebruikt, op welke manier werd ze gelabeld.
 
 Hoe zullen we de result-data analyseren
-
-\subsection{\IfLanguageName{dutch}{Scoren van engines}{Scoring of engines}}
-\label{sec:scoren-van-engines}
-Hoe worden de engines gescored: wat is 'correct', hoe houden we rekening met zekerheidsgraden et al
-
-\section{\IfLanguageName{dutch}{Fase 2}{Phase 2}}
-\label{sec:fase-2}
-Uitvoeren van het onderzoek. Hoe verliep het. Welke problemen doken er op, hoe werden die opgelost
-
-\section{\IfLanguageName{dutch}{Fase 3}{Phase 3}}
-\label{sec:fase-3}
-Analyseren van de resultaten
-
-\subsection{\IfLanguageName{dutch}{Analyseren van resultaten}{Analysing results}}
-\label{sec:analyseren-van-resultaten}
-Welke resultaten bevinden we, beantwoorden van onderzoeksvraag

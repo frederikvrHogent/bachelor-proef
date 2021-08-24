@@ -107,6 +107,15 @@
   date         = {2014},
   journaltitle = {International Conference on Image Processing (ICIP)},
   title        = {https://ieeexplore.ieee.org/abstract/document/7025172},
+  url          = {https://ieeexplore.ieee.org/abstract/document/7025172},
+}
+
+@Article{Zolas2020,
+  author       = {Zolas, Nikolas and Kroff, Zachary and Brynjolfsson, Erik and McElheran, Kristina and Beede, David and Buffington, Catherine and Goldschlag, Nathan and Foster, Lucia and Dinlersoz, Emin},
+  date         = {2020-12},
+  journaltitle = {National Bureau of Economic Research},
+  title        = {Advanced Technologies Adoption and Use by U.S. Firms : Evidence from the Annual Business Survey},
+  url          = {https://conference.nber.org/conf_papers/f138039.pdf},
 }
 
 @Comment{jabref-meta: databaseType:biblatex;}
