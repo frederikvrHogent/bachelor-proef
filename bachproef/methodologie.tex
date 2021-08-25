@@ -45,26 +45,142 @@ Voor deze bachelorproef ligt de focus op foto-archieven, het is de bedoeling dat
 
 \subsection{\IfLanguageName{dutch}{Keuze van externe API's}{Choice of external API's}}
 \label{sec:keuze-externe-API}
-Er zijn verschillende API's online beschikbaar die pre-trained computer vision aanbieden specifiek getrained voor algemene herkenning. Bij computer vision geldt vaak 'bigger is better', hoe groter de achterliggende dataset en hoe groter de compute power tijdens training, hoe beter het resultaat. Op basis van deze insteek en na onderzoek op fora werd er beslist om met de twee grootste spelers verder te gaan, namelijk Google Vision en AWS Rekognition. Om de vergelijking volledig te maken werd er gekozen om ook te integreren met een kleinere speler genaamd imagga.
+Er zijn verschillende API's online beschikbaar die pre-trained computer vision aanbieden specifiek getrained voor algemene herkenning. Een voordeel bij het gebruiken van API's is dat er geen lokale processing power moet gebruikt worden, een nadeel is dat herkenning niet werkt zonder een actieve internetverbinding. Bij computer vision geldt vaak 'bigger is better', hoe groter de achterliggende dataset en hoe groter de compute power tijdens training, hoe beter het resultaat. Op basis van deze insteek en na onderzoek op fora werd er beslist om met de twee grootste spelers verder te gaan, namelijk Google Vision en AWS Rekognition. Om de vergelijking volledig te maken werd er gekozen om ook te integreren met een kleinere speler genaamd imagga.
 
 Alle externe API's voldoen aan volgende kwaliteiten:
  \begin{itemize}
-     \item Mogelijkheid tot het taggen van afbeeldingen
+     \item Mogelijkheid tot het labelen van afbeeldingen
      \item Pre-trained, algemene herkenning
      \item Weinig tot geen configuratie nodig, gemakkelijke integratie
-     \item Uitgebreide documentatie beschikbaar
-     \item Mogelijkheid tot 1000 gratis verwerkingen
+     \item Uitgebreide API documentatie beschikbaar
+     \item Mogelijkheid tot gratis verwerkingen per maand
  \end{itemize}
 
-\section{\IfLanguageName{dutch}{Integratie met Computer Vision API's}{Integrating with Computer Vision API's}}
+*** Add extra info per engine***
+
+\section{\IfLanguageName{dutch}{Integratie met computer vision API's}{Integrating with Computer Vision API's}}
 \label{sec:integratie-met-computer-vision}
+Om de integratie met de 3 API's op te zetten werd er gekozen om een proof of concept applicatie te schrijven in C\# .Net Core 3.1. Deze applicatie heeft als doel om via code de verschillende API's aan te spreken; de dataset afbeeldingen aan te bieden; en de resultaten op te slaan. 
 
-\section{\IfLanguageName{dutch}{Scoren van Computer Vision API's}{Scoring of the Computer Vision API's}}
-\label{sec:scoren-van-computer-vision}
-Hoe worden de engines gescored: wat is 'correct', hoe houden we rekening met zekerheidsgraden et al
+De dataset afbeeldingen werden lokaal opgeslaan in jpg format. Voor iedere afbeelding wordt er per API 3 labels opgevraagd, voor iedere label wordt er ook een zekerheidsgraad opgevraagd uitgedrukt in procent. Deze zekerheidsgraad geeft aan hoe zeker de API is met het geretourneerde label. Naast de labels en de zekerheidsgraden wordt er per request bijgehouden hoeveel milliseconden de request heeft geduurd, de calls worden via een LAN-kabel op hetzelfde netwerk uitgevoerd. Alle resultaten worden naar een csv file weggeschreven met kolommen zoals aangeduid in Figuur~\ref{fig:columnsclassification}. De sourcecode van de testapplicatie is terug te vinden op GitHub \footnote{https://github.com/frederikvrHogent/bachelor-proef-code}.
 
-\section{\IfLanguageName{dutch}{Data}{Data}}
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{columnsclassification}
+    \caption{De kolommen van de classificatie-resultaten.}
+    \label{fig:columnsclassification}
+\end{figure}
+
+Volgende details van de integratie worden voor iedere API apart besproken:
+ \begin{itemize}
+    \item Creatie van account
+    \item Authenticatie via code
+    \item Request-response flow
+    \item Moeilijkheid van integratie
+\end{itemize}
+
+\subsection{\IfLanguageName{dutch}{imagga}{imagga}}
+\label{sec:integration-imagga}
+Opzet van een imagga account gebeurt door het invullen van persoonlijke gegevens en emailadres op de imagga website \footnote{https://imagga.com/}. Na activatie van de account kan er ingelogd worden en kan de API gebruikt worden zonder verdere configuratie. Er wordt automatisch een trial account gestart met 1000 gratis verwerkingen per maand.
+
+Tijdens creatie van de account wordt er automatisch een API Key en een API Secret aangemaakt, deze kunnen in code gebruikt worden om een authenticatie value op te bouwen. De authenticatie value moet bij iedere request meegestuurd worden. imagga voorziet geen SDK om de integratie met de API op te zetten maar voorziet wel uitgebreide API documentatie met code snippets in verschillende programmeertalen. Deze code snippets zijn gedetailleerd en bevatten alle nodige informatie om een request/response op te bouwen.
+
+imagga voorziet geen functionaliteit om lokale afbeeldingen in memory te laden en deze aan de API aan te bieden, de afbeeldingen moeten eerst geupload worden naar het platform via een POST REST request. Na het uploaden wordt er via de response een 'image upload id' terug gestuurd. Deze id kan vervolgens gebruikt worden om een GET labels REST request op te bouwen, deze request laat toe om het aantal geretourneerde labels te configureren via een parameter. imagga voorziet geen SDK dus moeten alle requests en responses via code opgezet worden. Requests worden voor de doeleinden van deze bachelorproef volledig via parameterisatie opgezet, responses door objecten te creëren die overeen komen met de JSON structuur en de responses te deserialiseren. De totale verwerkingstijd voor 1 afbeelding is de volledige tijd die nodig is om de image up te loaden en labels op te vragen, de calls worden synchroon uitgevoerd om er zeker van te zijn dat de verwerkingstijd correct wordt bijgehouden. Code snippet van de GET labels request Figuur~\ref{fig:imaggacode}.
+
+Opzet van een imagga acount en gebruik van de API is eenvoudig door de uitgebreide documentatie en code snippets. Omdat er geen SDK beschikbaar is moet er via code steeds een REST client worden opgebouwd en de JSON objecten moeten manueel worden gedeserialiseerd, wat voor extra code werk en complexiteit zorgt. Verder voorziet imagga geen ingebouwde functionaliteit om de API Key en API Secret buiten de code op te slaan, dit kan echter eenvoudig worden opgelost via een config file of environment variabele.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{imaggacode}
+    \caption{Code snippet van de GET labels call met imagga.}
+    \label{fig:imaggacode}
+\end{figure}
+
+\subsection{\IfLanguageName{dutch}{AWS Rekognition}{AWS Rekognition}}
+\label{sec:integration-AWS}
+Een AWS account kan gecreëerd worden via de AWS website \footnote{https://portal.aws.amazon.com/billing/signup} door persoonlijke gegevens emailadres in te vullen. Bij creatie van de account wordt automatisch de AWS Free Tier opgestart; de Free Tier is voor 12 maanden geldig en laat 5000 gratis verwerkingen per maand toe.
+
+Vervolgens moet er een IAM user aangemaakt worden, bij gebruik van AWS services - zoals AWS Rekognition - wordt authenticatie en authorisatie steeds uitgevoerd op basis van de IAM user. Nadat de user werd aangemaakt moeten de correcte access rights worden toegewezen zodat de Rekognition API aangeroepen kan worden. Wanneer de IAM user volledig werd opgezet kan een credentials file gedownload worden vanuit de AWS console \footnote{https://console.aws.amazon.com/} die de API Key en de API Secret bevat. Deze twee keys moeten in een specifieke file format opgeslagen worden in een subfolder van de home folder van de user genaamd ''.aws''. Naast de credentials file moet er in dezelfde folder een config file opgezet worden waarin de regio werd gedefinieerd, voor dit onderzoek werd er voor 'eu-west' gekozen omdat deze de beste performance heeft voor België.
+
+Via de Visual Studio NuGet package manager kunnen de AWSSDK.Core\footnote{https://www.nuget.org/packages/AWSSDK.Core/} en AWSSDK.Rekognition\footnote{https://www.nuget.org/packages/AWSSDK.Rekognition/} packages geïnstalleerd worden. Verder zijn er C\# code snippets beschikbaar die voorbeelden geven hoe de packages gebruikt kunnen worden. De images kunnen in memory worden geladen en aangeboden worden aan de Rekognition client die de achterliggende AWS endpoint aanspreekt, via een input parameter wordt bepaald hoeveel labels er geretourneerd worden. De SDK verbergt de achterliggende authenticatie en REST calls wat er voor zorgt dat de calls in enkele lijnen code worden afgehandeld.
+
+Creatie van de AWS account en IAM role kunnen verwarrend zijn voor een nieuwe gebruiker, er moeten meerdere stappen uitgevoerd worden voor er een API call kan gemaakt worden. Nadat de credentials en config correct werden opgezet is de code om de calls uit te voeren zeer eenvoudig. De AWS SDK's zorgen er voor dat de de achterliggende calls verborgen zijn en dat de consument slechts enkele lijnen code nodig heeft om de functionaliteit aan te roepen. Er zijn uitgebreide quickstarts, documentatie en codesnippets beschikbaar via de AWS console, echter zijn deze niet overzichtelijk gestructureerd.
+
+\subsection{\IfLanguageName{dutch}{Google Vision}{Google Vision}}
+\label{sec:integration-google}
+Voor Google Cloud gebruikt kan worden moet er een Google Cloud account worden aangemaakt, dit kan door een emailadres te registreren op de Google Cloud Console \footnote{https://console.cloud.google.com/}. Zoals bij imagga en AWS wordt er automatisch een Free Trial account geactiveerd. Deze free trial is geldig voor 90 dagen, en heeft 300 dollar budget voor cloud services - daarnaast worden de eerste 1000 images per maand aangeboden aan Google Vision gratis verwerkt.
+
+Na opzet van de account moet er een project aangemaakt worden, bij het project moet de user met access rights gedefinieerd worden en de Google Vision API geactiveerd worden. Na opzet van het project moet er een service account geactiveerd worden via de Google Cloud Console. De service account moet aan het project gelinked en de correcte access rights krijgen, vervolgens kan er van deze service account een JSON key file gedownload worden. Deze key file bevat access keys en andere account-informatie, het pad naar deze JSON key file wordt via een specifieke environment variabele vastgelegd. Voor de Google Vision API gebruikt kan worden moet ook de Cloud SDK geïnstalleerd worden, dit kan via een PowerShell command\footnote{https://cloud.google.com/sdk/docs/install}.
+
+In Visual Studio NuGet package manager kan nu de Google Cloud Vision SDK\footnote{https://www.nuget.org/packages/Google.Cloud.Vision.V1/} geïnstalleerd worden. Er zijn C\# code snippets beschikbaar die een voorbeeld geven hoe de client gebruikt kan worden, images kunnen in memory worden geladen en rechtstreeks worden aangeboden aan de client - een inputparameter bepaalt hoeveel labels er geretourneerd worden. Zoals bij AWS verbergt de SDK de achterliggende authenticatie en REST calls, dit zorgt er voor dat de calls op enkele lijnen code kunnen worden afgehandeld, zie Figuur~\ref{fig:googlecode}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{googlecode}
+    \caption{Code snippet van de GET labels call met Google.}
+    \label{fig:googlecode}
+\end{figure}
+
+Zoals bij AWS kan opzet en creatie van de Google Cloud account en authenticatie ingewikkeld zijn voor een nieuwe gebruiker. Echter na opzet van de credentials wordt de implementatie gemakkelijk afgewerkt, de SDK zorgt voor een eenvoudige en 'cleane' implementatie met de SDK. Ook bij Google Vision zijn er voldoende codesnippets, documentatie en quickstarts beschikbaar - de informatie is duidelijk en gestructureerd.
+
+\section{\IfLanguageName{dutch}{Testdata}{Testdata}}
 \label{sec:methodologie-data}
-Welke data wordt er gebruikt, op welke manier werd ze gelabeld.
+De dataset gebruik in dit onderzoek bestaat uit 30 gelabelde afbeeldingen afkomstig uit de Beeldbank van Stad Gent \footnote{https://beeldbank.stad.gent/} - ik druk graag mijn dank uit aan het Gents Archief om deze afbeeldingen beschikbaar te stellen en voor de aangename communicatie. Om zo nauw mogelijk aan te sluiten op de onderzoeksvraag zijn er verschillende soorten afbeeldingen gebruikt: mensen; bekende gebouwen; stadsbeelden; landschappen; interieur. Alle afbeeldingen uit deze archieven komen uit de periode 1796 tot nu. De afbeeldingen zijn een collectie van zowel foto's als postkaarten.
 
-Hoe zullen we de result-data analyseren
+Alle afbeeldingen zijn manueel gelabeld.... 
+*** ADD INFO FROM GENT'S ARCHIEF ***
+
+De afbeeldingen in de dataset zijn onder volgende categorieën verdeeld:
+ \begin{itemize}
+    \item 15 zwart-wit foto's of postkaarten
+    \item 15 foto's met kleur of postkaarten
+\end{itemize}
+
+Van iedere afbeelding worden de eerste 5 labels bijgehouden in de dataset, indien er een beschrijving beschikbaar is wordt deze ook bijgehouden. Bij sommige afbeeldingen werd er een notitie toegevoegd, deze is informatief en wordt niet gebruikt om de modellen te scoren. De URL met verwijzing naar de bron is voor iedere afbeelding beschikbaar. Wanneer er velden niet zijn ingevuld betekent het dat de data niet beschikbaar was. 
+
+De volledige dataset kan via Google Sheets worden geraadpleegd \footnote{https://docs.google.com/spreadsheets/d/11UHeuM9SxL0aSF5OMRoSS2XG5aFBfdMBoC1CjSZI0Jg}.
+
+\section{\IfLanguageName{dutch}{Scoren van computer vision API's}{Scoring of the Computer Vision API's}}
+\label{sec:scoren-van-computer-vision}
+Iedere afbeelding in de dataset heeft tot 3 labels, naast de labels is er al dan niet een beschrijving beschikbaar. Iedere afbeelding wordt aangeboden aan de 3 verschillende API's aangeboden, iedere API levert 3 labels en bijhorende zekerheidsgraad af. Naast labels en de zekerheidsgraad wordt de snelheid van de API call bijgehouden.
+
+\subsection{\IfLanguageName{dutch}{Scoren van de labels}{Scoring of the labels}}
+\label{sec:scoren-van-labels}
+Een eerste filtering van de labels gebeurt op basis van zekerheidsgraad, wanneer deze API's in een productie-omgeving gebruikt worden is het belangrijk dat enkel de kwalitatieve labels behouden worden. Daarom wordt iedere label waarvan de zekerheidsgraad lager dan 75\% is uit de resultaten gehaald en apart bijgehouden. Er werd gekozen voor 75\% omdat er geen zware consequenties vasthangen aan het toelaten van een incorrect label, deze threshold kan verder afgesteld worden op basis van de performantie.
+
+Ieder label wordt ingedeeld in 1 van volgende categorieën:
+ \begin{itemize}
+    \item Volledig correct
+    \item Correct
+    \item Enigszins correct
+    \item Niet correct of valse positieven
+    \item Zekerheidsgraad te laag
+\end{itemize}
+
+Voor ieder model worden alle labels per categorie opgeteld om zo een overzicht van de algemene correctheid van het model te bekomen.
+
+\subsubsection{\IfLanguageName{dutch}{Volledig correct}{Completely correct}}
+\label{sec:completely-correct}
+De label komt overeen met de beschrijving of een label uit de originele dataset voor de afbeelding in kwestie.
+
+\subsubsection{\IfLanguageName{dutch}{Correct}{Correct}}
+\label{sec:correct}
+De label komt niet overeen met een label uit de originele dataset maar is wel correct voor de afbeelding in kwestie.
+
+\subsubsection{\IfLanguageName{dutch}{Enigszins correct}{Somewhat correct}}
+\label{sec:somewhat-correct}
+De label komt niet overeen met een label uit de originele dataset maar is enigszins correct voor de afbeelding in kwestie. Onder deze categorie vallen labels die correct zijn voor de afbeelding maar te ruim zijn om waarde toe te voegen.
+
+\subsubsection{\IfLanguageName{dutch}{Niet correct of valse positieven}{Not correct or false positives}}
+\label{sec:not-correct}
+De label komt niet overeen met een label uit de originele dataset en is niet correct voor de afbeelding in kwestie. Aangezien de labels in deze categorie reeds boven de threshold van 75\% vallen kan deze categorie ook de valse positieven genoemd worden: het model was meer dan 75\% zeker maar de label bleek niet correct te zijn.
+
+\subsubsection{\IfLanguageName{dutch}{Zekerheidsgraad te laag}{Confidence too low}}
+\label{sec:zekerheidsgraad-te-laag}
+De zekerheidsgraad gekoppeld aan de label valt onder de threshold van 75\%.
+
+\subsection{\IfLanguageName{dutch}{Scoren van de snelheid}{Scoring of speed}}
+\label{sec:scoren-of-speed}
+Bij het labelen van foto-archieven is snelheid in het algemeen van minder belang, er is typisch geen tijdsdruk om de labels binnen een bepaalde tijdspanne aan te duiden. Manuele labeling duurt minstens 10 seconden per foto: de persoon moet de foto openklikken; 1 of meerdere labels intypen; de labels opslaan; volgende foto selecteren. 
+
+Het is dan ook belangrijk dat de automatische labeling via computer vision binnen dit tijdsbestek van 10 seconden blijft, op deze manier wordt ten minste de verwerkingstijd van manuele labeling gehaald. Naast deze constraint blijft snellere verwerking de voorkeur hebben op tragere verwerking, deze eigenschap zal bijgevolg ook worden opgenomen in de scoring van de modellen.

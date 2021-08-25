@@ -80,7 +80,7 @@
 
 @Article{Breuel2013,
   author       = {Breuel, Thomas and Ul-Hasan, Adnan and Al-Azawi, Mayce and Shafait, Faisal},
-  date         = {08-2013},
+  date         = {2013-08},
   journaltitle = {International Conference on Document Analysis and Recognition},
   title        = {High-Performance OCR for Printed English and Fraktur Using LSTM Networks},
   url          = {https://ieeexplore.ieee.org/abstract/document/6628705},
