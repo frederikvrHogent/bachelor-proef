@@ -2,7 +2,7 @@
 %% Resultaten
 %%=============================================================================
 
-\chapter{\IfLanguageName{dutch}{Resultaten}{Results}}
+\chapter{\IfLanguageName{dutch}{Vergelijking van resultaten}{Comparing results}}
 \label{ch:resultaten}
 
 \section{\IfLanguageName{dutch}{Inleiding}{Preface}}
@@ -11,29 +11,15 @@ Na het uitvoeren van de code zoals besproken in Hoofdstuk\ref{ch:methodologie} w
 
 Op basis van deze csv werd voor iedere label een score vastgelegd zoals besproken in Sectie~\ref{sec:scoren-van-labels}. Daarnaast werd voor ieder gevonden label aangeduid of de threshold van 75\% zekerheidsgraad gehaald werd, de volledige resultaten van de scoring kunnen teruggevonden worden in deze\footnote{https://docs.google.com/spreadsheets/d/1oCs-aDkhPV2lCayjLyzUPF0SlAUZ7vMjzD4DYuIluyE} Google Sheet. In de sheet kan men ook de aggregatie van de resultaten en grafieken terugvinden.
 
-In de eerste sectie van dit hoofdstuk worden de resultaten besproken waarbij labels met een zekerheidsgraad onder de threshold genegeerd werden. In de volgende sectie worden de volledige resultaten van het onderzoek besproken en wordt de impact van de threshold per computer vision API verder toegelicht. Ten slotte wordt de peformantie van iedere API besproken en wordt er een besluit getrokken in functie van de onderzoeksvraag.
+In de eerste sectie van dit hoofdstuk worden de resultaten besproken waarbij labels met een zekerheidsgraad onder de threshold genegeerd worden. In de volgende sectie worden de volledige resultaten van het onderzoek besproken en wordt de impact van de threshold per computer vision API verder toegelicht. Ten slotte wordt de peformantie van iedere API besproken en wordt er een besluit getrokken in functie van de onderzoeksvraag.
 
-\section{\IfLanguageName{dutch}{Resultaten met thresholding}{Results with thresholding on confidence}}
+\section{\IfLanguageName{dutch}{Resultaten met thresholding toegepast}{Results with thresholding on confidence}}
 \label{sec:resultaten-met-thresholding}
 In de genormaliseerde staafdiagram op Figuur~\ref{fig:resultswiththresholding} worden het aantal resultaten per score van iedere computer vision API afgebeeld, waarbij de labels met een zekerheidsgraad onder 75\% werden genegeerd. Figuur~\ref{fig:resultswiththresholdingnotstacked} beeldt dezelfde data af maar in absolute waardes.
 
-\begin{figure}
-    \centering    
-    \includegraphics[width=\textwidth]{resultswiththresholding}
-    \caption{Resultaten label-herkenning per API, met thresholding}
-    \label{fig:resultswiththresholding}
-\end{figure}
+De percentages besproken in de volgende subsecties zijn steeds de percentages van het totaal van de respectievelijke scores zoals afgebeeld in Figuur~\ref{fig:resultswiththresholding}.
 
-\begin{figure}
-    \centering    
-    \includegraphics[width=\textwidth]{resultswiththresholdingnotstacked}
-    \caption{Resultaten label-herkenning per API, met thresholding niet genormaliseerd}
-    \label{fig:resultswiththresholdingnotstacked}
-\end{figure}
-
-Bij zowel Google Vision als AWS Rekognition zijn de resultaten gelijkaardig, imagga scoort significant verschillend. Aangezien de resultaten van Google Vision en AWS Rekognition dicht bij elkaar liggen worden deze naast elkaar besproken. Bij beide API's is het grootste deel van de gevonden labels 'correct'. Dit betekent dat de label correct was voor de afbeelding maar niet in de originele dataset vervat zat. Verder wijken ook de scores van van 'volledig correct' en 'engiszins correct' niet van elkaar significant af. Bij Google Vision werden er 8 labels - of 9,2\% van het totaal- als 'niet correct' gepunt, AWS Rekognition scoort hier 12 verkeerde labels of 14,12\% van het totaal. Een verschil minder dan 5\% is niet significant maar kan een trend voorspellen.
-
-In Figuur~\ref{fig:resultsthresholding} wordt het aantal labels afgebeeld dat de threshold-zekerheidsgraad niet haalde, opnieuw zien we een niet significant verschil tussen Google Vision en AWS Rekognition. Bij Google Vision vielen 3 labels of 3,3\% van het totaal onder de threshold, bij AWS Rekognition is dat 5 labels of 5,6\% van het totaal. Men kan stellen dat de resultaten over de hele lijn sterk gelijkaardig zijn tussen Google Vision en AWS Rekognition, met de mogelijkheid dat Google Vision iets beter scoort.
+Het is belangrijk om te vermelden dat bij imagga significant meer resultaten onder de threshold vielen waardoor de samplegroep in deze sectie slechts 31 scores omvat, zie Figuur~\ref{fig:resultsthresholding}.
 
 \begin{figure}
     \centering    
@@ -42,19 +28,82 @@ In Figuur~\ref{fig:resultsthresholding} wordt het aantal labels afgebeeld dat de
     \label{fig:resultsthresholding}
 \end{figure}
 
-De resultaten van imagga geven een ander beeld, bij Figuur~\ref{fig:resultswiththresholdingnotstacked} is op het eerste zich duidelijk dat er minder resultaten beschikbaar zijn als bij Google Vision of AWS Rekognition. Dit komt omdat 59 van de 90 labels (of 65,6\%) onder de threshold vallen, dit zorgt voor slechts 31 resultaten die geanalyseerd kunnen worden.
+\begin{figure}
+    \centering    
+    \includegraphics[width=\textwidth]{resultswiththresholding}
+    \caption{Genormaliseerde resultaten label-herkenning per API, resultaten onder de threshold genegeerd}
+    \label{fig:resultswiththresholding}
+\end{figure}
 
-Opvallend is dat voor imagga het aantal labels met 'volledig correct' een significant hoger percentage (19,35\%) van het totaal omvat als voor Google Vision (10,34\%) of AWS Rekognition (9,41\%). Verder heeft imagga slechts 1 'engiszins correct' label. 9 labels of 29,03\% van het totaal werden gescoord als 'niet correct', dit is een significant verschil met de 'niet correct' scores van Google Vision en AWS Rekognition. Aangezien er voor imagga procentueel gezien veel labels als 'volledig correct' en 'niet correct' werden aangeduid maar weinig labels als 'enigszins correct' kan men stellen dat het model ofwel zeer correct is, ofwel volledig verkeerd is. 15 labels of 48,39\% van het totaal werden voor imagga als 'correct' aangeduid, opnieuw is dat een significant lager percentage vergeleken met Google Vision (67,8\%) en AWS Rekognition (64,7\%).
+\begin{figure}
+    \centering    
+    \includegraphics[width=\textwidth]{resultswiththresholdingnotstacked}
+    \caption{Resultaten label-herkenning per API, resultaten onder de thresholding genegeerd}
+    \label{fig:resultswiththresholdingnotstacked}
+\end{figure}
 
-Verder viel bij het analyseren van de resultaten op dat imagga de enige API is die zekerheidsgraden van 100\% terug geeft, opnieuw kan men stellen dat imagga ofwel heel zeker is of helemaal niet zeker. De zekerheidsgraden van Google Vision en AWS Rekognition bevinden zich meestal tussen 85\% en 99.9\%.
+%Bij zowel Google Vision als AWS Rekognition zijn de resultaten gelijkaardig, imagga scoort significant verschillend. Aangezien de resultaten van Google Vision en AWS Rekognition dicht bij elkaar liggen worden deze naast elkaar besproken. 
 
-\section{\IfLanguageName{dutch}{Resultaten zonder thresholding}{Results without thresholding}}
+\subsection{\IfLanguageName{dutch}{Volledig correct}{volledig correct}}
+\label{sec:resultaten-volledig-correct}
+Percentages in volgorde van grootte:
+\begin{itemize}
+    \item Imagga: 19,4\%
+    \item Google Vision: 10,3\%
+    \item AWS Rekognition: 9,4\%
+\end{itemize}
+
+imagga behaalt in deze categorie een signifcant hogere score dan Google Vision of AWS Rekognition met een verschil van +-10\%. Google Vision en AWS Rekognition zijn onderling niet significant verschillend.
+imagga geeft gemiddeld minder algemene labels terug dan Google Vision of AWS Rekognition, het durft vaker een specifiek object of concept benoemen. Deze manier van labelen zorgt voor een hoger percentage 'volledig correct'.
+
+\subsection{\IfLanguageName{dutch}{Correct}{Correct}}
+\label{sec:resultaten-correct}
+Percentages in volgorde van grootte:
+\begin{itemize}
+    \item Google Vision: 67,8\%
+    \item AWS Rekogniion: 64,7\%
+    \item imagga: 48,4\%
+\end{itemize}
+
+Opnieuw scoren Google Vision en AWS Rekognition niet significant verschillend van elkaar, er is echter een kloof van 15\% tot 19\% naar imagga. Uit deze data kan gesteld worden dat Google Vision en AWS Rekognition sterk zijn in labels vinden die correct zijn, maar eerder in de algemene vorm. Bij Google Vision viel in de resultaten op dat er vaak het label 'sky' werd geretourneerd en bij AWS Rekognition 'Person'. Deze objecten zijn meestal niet de belangrijkste maar zijn wel 'correct'.
+
+\subsection{\IfLanguageName{dutch}{Enigszins correct}{Somewhat correct}}
+\label{sec:resultaten-enigszins-correct}
+Percentages in volgorde van grootte:
+\begin{itemize}
+    \item Google Vision: 12,6\%
+    \item AWS Rekogniion: 11,8\%
+    \item imagga: 3,2\%
+\end{itemize}
+
+Google Vision en AWS Rekognition zijn net zoals bij de voorgaande categorieën niet significant verschillend. imagga scoort ook in deze categorie een stuk lager in vergelijking met de andere twee API's. Zoals in de vorige sectie besproken geven zowel Google Vision als AWS Rekognition regelmatig labels terug die algemeen zijn in plaats van specifiek. Labels in de categorie 'enigszins correct' geven een te vage beschrijving om waarde toe te voegen aan de afbeelding. Zo geeft AWS Rekognition bij sample12 - een foto van fruit op de markt - de label 'plant' terug. imagga geeft gemiddeld meer specifieke labels terug, wat de lage score in deze categorie verklaart.
+
+\subsection{\IfLanguageName{dutch}{Niet correct}{niet correct}}
+\label{sec:resultaten-niet-correct}
+Percentages in oplopende volgorde van grootte:
+\begin{itemize}
+    \item Google Vision: 9,2\%
+    \item AWS Rekogniion: 14,1\%
+    \item imagga: 29\%
+\end{itemize}
+
+In deze categorie valt er een verschil op te merken van 4,9\% tussen Google Vision en AWS Rekognition. Dit verschil kan als niet significant beschoud worden maar kan op een trend wijzen waarbij Google Vision minder foute resultaten retourneer dan AWS Rekognition. imagga scoort in deze categorie relatief slecht, er zijn significant meer foute resultaten als bij Google Vision of AWS Rekognition. Opnieuw kunnen deze verschillen verklaard worden door de tendens van imagga om meer specifieke labels terug te geven, dit zorgt voor meer 'volledig correct' maar de keerzijde is dat er ook 'niet correct' labels zijn. Google Vision en AWS Rekognition spelen het eerder veilig om zo de foutmarges zo laag mogelijk te houden.
+
+\section{\IfLanguageName{dutch}{Resultaten met thresholding niet toegepast}{Results without thresholding}}
 \label{sec:resultaten-zonder-thresholding}
-In Figuur~\ref{fig:resultswithoutthresholding} worden de opgetelde scores per API genormaliseerd afgebeeld, zonder dat de scores onder de threshold werden genegeerd.
+In Figuur~\ref{fig:resultswithoutthresholding} worden de opgetelde scores per API genormaliseerd afgebeeld, de scores onder de threshold werden in deze grafiek niet genegeerd.
 
-Het verschil in scores tussen Google Vision en AWS Rekognition is opnieuw niet significant, dit is logisch te verklaren omdat bij beide API's slechts enkele labels onder de threshold vielen. Bij imagga wordt er echter belangrijke significante verschillen opgemerkt, er zijn 27 meer 'correct' labels en 26 meer 'niet correct' labels. Procentueel gezien stijgt 'niet correct' met 9,1\% en daalt 'volledig correct' met 11,6\% de andere scores zijn niet significant verschillend.
+Het verschil in percentages tussen thresholding genegeerd en niet genegeerd zijn niet significant voor zowel Google Vision als AWS Rekognition. Dit kan verklaard worden doordat beide respectievelijk slechts 3 en 5 labels onder de threshold hadden.
 
-Er kan gesteld worden dat imagga veruit het meest terughoudend is met de zekerheidgraad, een correct manier van labelen aangezien het accepteren van een lagere zekerheidsgraad procentueel gezien tot meer verkeerde resultaten leidt.
+Bij imagga worden er wel significante verschillen opgemerkt, er zijn 27 meer 'correct' labels en 26 meer 'niet correct' labels. Procentueel gezien krijgen we volgende wijzigingen:
+\begin{itemize}
+    \item Volledig correct: -11,6\%
+    \item Correct: -1,7\%
+    \item Enigszins correct: +3,5\%
+    \item Niet correct: +9,9\%
+\end{itemize}
+
+Er kan gesteld worden dat imagga veruit het meest terughoudend is met de zekerheidgraad wat er voor zorgt dat er veel meer labels onder de threshold vallen. Dit lijkt een correct manier van labelen voor imagga aangezien het accepteren van een lagere zekerheidsgraad procentueel gezien tot meer verkeerde resultaten leidt. Verder viel bij het analyseren van de resultaten op dat imagga de enige API is die zekerheidsgraden van 100\% terug geeft, opnieuw kan men stellen dat imagga ofwel heel correct is, ofwel heel incorrect is.
 
 \begin{figure}
     \centering    
@@ -65,14 +114,42 @@ Er kan gesteld worden dat imagga veruit het meest terughoudend is met de zekerhe
 
 \section{\IfLanguageName{dutch}{Snelheid per API}{Speed per api}}
 \label{sec:snelheid-per-api}
-Alhoewel snelheid van verwerking geen belangrijk doel is in de use-case van deze Bachelorproef wordt ze toch kort geanalyseerd als bijkomstige informatie. 
+Alhoewel snelheid van verwerking geen belangrijk doel is in de onderzoeksvraag van deze Bachelorproef wordt ze toch kort geanalyseerd als bijkomstige informatie.
+
 Van iedere call werd bijgehouden hoe snel labels geretourneerd worden, deze data werd verwerkt tot gemiddeldes:
+\begin{itemize}
+    \item Google Vision: 594,17 milliseconden per call
+    \item AWS Rekognition: 1068,59 milliseconden per call
+    \item Imagga: 1641,42 milliseconden per call
+\end{itemize}
 
-\begin{enumerate}
-    \item Classificeren van afbeeldingen: terminologie en technieken
-    \item Bespreking belangrijkste stromingen binnen machine learning
-    \item Computer vision: hoe wordt classificatie en machine learning gecombineerd
-\end{enumerate}
+Bij alle API's blijft het gemiddelde ver onder het laagste gemiddelde dat gehaald wordt bij manuele classificatie: 10.000 milliseconden. Google Vision heeft de snelste verwerkingstijden, gevolgd door AWS Rekognition, gevolgd door imagga. imagga heeft de traagste verwerking, dit wordt beïnvloed door de requirement dat afbeeldingen altijd eerst moeten geupload worden voor ze kunnen gelabeld worden, er moeten 2 calls gemaakt worden in plaats van 1 call voor Google Vision of AWS Rekognition.
 
-\section{\IfLanguageName{dutch}{Besluit}{Resolution}}
+Er kan gesteld worden dat automatische labeling gemiddeld sneller verloopt dan manuele labeling, die door Archief Gent werd ingeschat op een absoluut minimum van 10.000 milliseconden per afbeelding.
+
+\section{\IfLanguageName{dutch}{Resultaten in functie van de onderzoeksvraag}{Resolution}}
 \label{sec:besluit}
+Op basis van de data besproken in vorige secties kan samengevat worden dat Google Vision en AWS Rekognition onderling weinig verschillend zijn, beiden scoren op alle categorieen weinig verschillend van elkaar. imagga daarintegen verschilt doordat het meer specifieke labels teruggeeft maar ook doordat het een lagere zekerheid heeft van de labels.
+
+De doelstellingen opgezet in de probleemstelling worden in dit besluit per API besproken.
+
+\subsection{\IfLanguageName{dutch}{Foto's zoekbaar maken door middel van AI}{Make pictures searchable with AI}}
+\label{sec:resultaten-doelstelling1}
+Zowel Google Vision, AWS Rekognition als imagga zijn in staat om foto's zoekbaar te maken op basis van AI.
+
+\subsection{\IfLanguageName{dutch}{De oplossing moet gemakkelijk te gebruiken zijn}{Ease of use}}
+\label{sec:resultaten-doelstelling2}
+De API's besproken in dit onderzoek zijn allen gemakkelijk te gebruiken voor een persoon met een basiskennis aan IT. Er kan gesteld worden dat een gemiddeld bedrijf de kennis in huis heeft, of de kennis kan huren, om integratie met een computer vision API op te zetten.
+
+\subsection{\IfLanguageName{dutch}{De oplossing moet breed bruikbaar zijn; voor veel verschillende soorten foto-archieven}{Solution must be usable for many different types of pictures}}
+\label{sec:resultaten-doelstelling3}
+In de testdata gebruikt in dit onderzoek werden er verschillende soorten afbeeldingen aangeboden: landschappen; evenementen; gebouwen; postkaarten; zwart-wit fotos; mensen; interieur. De API's konden bij alle soorten steeds labels toewijzen. Bij oudere
+
+\subsection{\IfLanguageName{dutch}{Foutmarge van maximaal 15\%}{Margin of error not higher than 15\%}}
+\label{sec:resultaten-doelstelling4}
+
+\subsection{\IfLanguageName{dutch}{Besluit}{Resolution}}
+\label{sec:resultaten-besluit}
+context ontbreekt
+
+Verder valt het op dat alle API's laag scoren voor 'volledig correct', dit wordt eenerzijds beinvloed door de kwaliteit van de labels in de dataset

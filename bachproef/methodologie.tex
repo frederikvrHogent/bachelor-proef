@@ -133,7 +133,7 @@ De afbeeldingen in de dataset zijn onder volgende categorieën verdeeld:
     \item 15 foto's met kleur of postkaarten
 \end{itemize}
 
-Alle afbeeldingen in de Beeldbank werden manueel gelabeld, er is hier bij het Archief Gent momenteel geen eenduidig systeem voor. Afbeeldingen kunnen gelabeld worden door de uploader, andere worden in bulk gelabeld, bij nog andere worden er achteraf labels toegevoegd. Vooral bij de zwart-wit foto's valt het op dat gedetailleerde labels ontbreken, wat een invloed heeft op de scoring van de labels.
+Alle afbeeldingen in de Beeldbank werden manueel gelabeld, er is hier bij het Archief Gent momenteel geen eenduidig systeem voor. Afbeeldingen kunnen gelabeld worden door de uploader, andere worden in bulk gelabeld, bij nog andere worden er achteraf labels toegevoegd. Vooral bij de oudere zwart-wit foto's valt het op dat gedetailleerde labels ontbreken, wat een invloed heeft op de scoring van de labels.
 
 *** ADD INFO FROM GENT'S ARCHIEF ***
 
@@ -183,6 +183,6 @@ Bij het analyseren van de resultaten wordt er per computer vision model besproke
 
 \subsection{\IfLanguageName{dutch}{Scoren van de snelheid}{Scoring of speed}}
 \label{sec:scoren-of-speed}
-Bij het labelen van foto-archieven is snelheid in het algemeen van minder belang, er is typisch geen tijdsdruk om de labels binnen een bepaalde tijdspanne aan te duiden. Manuele labeling duurt minstens 10 seconden per foto: de persoon moet de foto openklikken; 1 of meerdere labels intypen; de labels opslaan; volgende foto selecteren. 
+Bij het labelen van foto-archieven is snelheid in het algemeen van minder belang, er is typisch geen tijdsdruk om de labels binnen een bepaalde tijdspanne aan te duiden. Manuele labeling duurt minstens 10 seconden of 10.000 milliseconden per foto: de persoon moet de foto openklikken; 1 of meerdere labels intypen; de labels opslaan; volgende foto selecteren. 
 
 Het is dan ook belangrijk dat de automatische labeling via computer vision binnen dit tijdsbestek van 10 seconden blijft, op deze manier wordt ten minste de verwerkingstijd van manuele labeling gehaald. Naast deze constraint blijft snellere verwerking de voorkeur hebben op tragere verwerking, deze eigenschap zal bijgevolg ook worden opgenomen in de scoring van de modellen.
