@@ -127,14 +127,15 @@ Zoals bij AWS kan opzet en creatie van de Google Cloud account en authenticatie 
 \label{sec:methodologie-data}
 De dataset gebruik in dit onderzoek bestaat uit 30 gelabelde afbeeldingen afkomstig uit de Beeldbank van Stad Gent \footnote{https://beeldbank.stad.gent/} - ik druk graag mijn dank uit aan het Gents Archief om deze afbeeldingen beschikbaar te stellen en voor de aangename communicatie. Om zo nauw mogelijk aan te sluiten op de onderzoeksvraag zijn er verschillende soorten afbeeldingen gebruikt: mensen; bekende gebouwen; stadsbeelden; landschappen; interieur. Alle afbeeldingen uit deze archieven komen uit de periode 1796 tot nu. De afbeeldingen zijn een collectie van zowel foto's als postkaarten.
 
-Alle afbeeldingen zijn manueel gelabeld.... 
-*** ADD INFO FROM GENT'S ARCHIEF ***
-
 De afbeeldingen in de dataset zijn onder volgende categorieën verdeeld:
- \begin{itemize}
+\begin{itemize}
     \item 15 zwart-wit foto's of postkaarten
     \item 15 foto's met kleur of postkaarten
 \end{itemize}
+
+Alle afbeeldingen in de Beeldbank werden manueel gelabeld, er is hier bij het Archief Gent momenteel geen eenduidig systeem voor. Afbeeldingen kunnen gelabeld worden door de uploader, andere worden in bulk gelabeld, bij nog andere worden er achteraf labels toegevoegd. Vooral bij de zwart-wit foto's valt het op dat gedetailleerde labels ontbreken, wat een invloed heeft op de scoring van de labels.
+
+*** ADD INFO FROM GENT'S ARCHIEF ***
 
 Van iedere afbeelding worden de eerste 5 labels bijgehouden in de dataset, indien er een beschrijving beschikbaar is wordt deze ook bijgehouden. Bij sommige afbeeldingen werd er een notitie toegevoegd, deze is informatief en wordt niet gebruikt om de modellen te scoren. De URL met verwijzing naar de bron is voor iedere afbeelding beschikbaar. Wanneer er velden niet zijn ingevuld betekent het dat de data niet beschikbaar was. 
 
@@ -142,19 +143,16 @@ De volledige dataset kan via Google Sheets worden geraadpleegd \footnote{https:/
 
 \section{\IfLanguageName{dutch}{Scoren van computer vision API's}{Scoring of the Computer Vision API's}}
 \label{sec:scoren-van-computer-vision}
-Iedere afbeelding in de dataset heeft tot 3 labels, naast de labels is er al dan niet een beschrijving beschikbaar. Iedere afbeelding wordt aangeboden aan de 3 verschillende API's aangeboden, iedere API levert 3 labels en bijhorende zekerheidsgraad af. Naast labels en de zekerheidsgraad wordt de snelheid van de API call bijgehouden.
+Iedere afbeelding in de dataset heeft tot 3 labels, naast de labels is er al dan niet een beschrijving beschikbaar. Iedere afbeelding wordt aangeboden aan de 3 verschillende API's, iedere API levert 3 labels en bijhorende zekerheidsgraad af. Naast labels en de zekerheidsgraad wordt de snelheid van de API call bijgehouden.
 
 \subsection{\IfLanguageName{dutch}{Scoren van de labels}{Scoring of the labels}}
 \label{sec:scoren-van-labels}
-Een eerste filtering van de labels gebeurt op basis van zekerheidsgraad, wanneer deze API's in een productie-omgeving gebruikt worden is het belangrijk dat enkel de kwalitatieve labels behouden worden. Daarom wordt iedere label waarvan de zekerheidsgraad lager dan 75\% is uit de resultaten gehaald en apart bijgehouden. Er werd gekozen voor 75\% omdat er geen zware consequenties vasthangen aan het toelaten van een incorrect label, deze threshold kan verder afgesteld worden op basis van de performantie.
-
 Ieder label wordt ingedeeld in 1 van volgende categorieën:
- \begin{itemize}
+\begin{itemize}
     \item Volledig correct
     \item Correct
     \item Enigszins correct
-    \item Niet correct of valse positieven
-    \item Zekerheidsgraad te laag
+    \item Niet correct
 \end{itemize}
 
 Voor ieder model worden alle labels per categorie opgeteld om zo een overzicht van de algemene correctheid van het model te bekomen.
@@ -171,13 +169,17 @@ De label komt niet overeen met een label uit de originele dataset maar is wel co
 \label{sec:somewhat-correct}
 De label komt niet overeen met een label uit de originele dataset maar is enigszins correct voor de afbeelding in kwestie. Onder deze categorie vallen labels die correct zijn voor de afbeelding maar te ruim zijn om waarde toe te voegen.
 
-\subsubsection{\IfLanguageName{dutch}{Niet correct of valse positieven}{Not correct or false positives}}
+\subsubsection{\IfLanguageName{dutch}{Niet correct}{Not correct}}
 \label{sec:not-correct}
-De label komt niet overeen met een label uit de originele dataset en is niet correct voor de afbeelding in kwestie. Aangezien de labels in deze categorie reeds boven de threshold van 75\% vallen kan deze categorie ook de valse positieven genoemd worden: het model was meer dan 75\% zeker maar de label bleek niet correct te zijn.
+De label komt niet overeen met een label uit de originele dataset en is niet correct voor de afbeelding in kwestie. Wanneer labels een synoniem zijn van elkaar wordt er slechts 1 als correct aangeduid, de andere worden op niet correct gepunt.
+Vb. 'bicycle'; 'bike'
 
-\subsubsection{\IfLanguageName{dutch}{Zekerheidsgraad te laag}{Confidence too low}}
-\label{sec:zekerheidsgraad-te-laag}
-De zekerheidsgraad gekoppeld aan de label valt onder de threshold van 75\%.
+
+\subsubsection{\IfLanguageName{dutch}{Zekerheidsgraad thresholding}{Confidence thresholding}}
+\label{sec:scoring-thresholding}
+Naast de scoring van de labels wordt er ook rekening gehouden met de zekerheidsgraad, wanneer deze API's in een productie-omgeving gebruikt worden is het belangrijk dat enkel de correcte labels behouden worden. Daarom werd er besloten dat alle labels met een zekerheidsgraad die minder is dan 75\% niet worden meegeteld voor het productie-resultaat. Er werd gekozen voor een threshold van 75\% omdat er geen zware consequenties vasthangen aan het toelaten van een incorrect label, deze threshold kan verder afgesteld worden op basis van verder onderzoek; er zou per computer vision model onderzocht kunnen worden welke threshold voor de beste resultaten zorgt.
+
+Bij het analyseren van de resultaten wordt er per computer vision model besproken welke invloed deze threshold op het eindresultaat heeft. 
 
 \subsection{\IfLanguageName{dutch}{Scoren van de snelheid}{Scoring of speed}}
 \label{sec:scoren-of-speed}
