@@ -36,5 +36,11 @@
 % De samenvatting in de hoofdtaal van het document
 
 \chapter*{\IfLanguageName{dutch}{Samenvatting}{Abstract}}
+Cloud platformen en de bijhorende AI-services kennen de laatste jaren een enorme groei, ook sinds de Covid pandemie zetten steeds meer bedrijven in op de cloud. Binnen de wereld van digitale archivering wordt er via AI veel geïnvesteerd op extractie van data uit tekstdocumenten, er wordt echter weinig ingezet op extractie van data uit afbeeldingen.
 
+Er zijn veel organisaties met foto-archieven die niet gedigitaliseerd zijn of niet zoekbaar zijn, in deze paper wordt onderzocht of AI (en specifiek pre-trained computer vision modellen) gebruikt kan worden om afbeeldingen zoekbaar te maken. Er werd steeds van een business context uitgegaan: de oplossing moet in de echte wereld bruikbaar zijn en moet configureerbaar zijn door een gemiddeld bedrijf. Er werd gekozen om 3 computer vision providers vergelijkend te onderzoeken: Google Vision, AWS Rekognition en imagga. De verschillende providers werden getest op basis van test-data afkomstig uit een echt foto-archief.
+
+De resultaten tonen aan dat de computer vision modellen kunnen geïmplementeerd worden in een productie-omgeving om archivarissen bij te staan hun werk sneller en consistenter uit te voeren, de modellen staan echter niet ver genoeg om mensen te vervangen. Niet alle providers scoorden even goed: Google Vision en AWS Rekognition kwamen als beste kandidaten naar voor, imagga had een te grote foutenmarge. 
+
+Tijdens het onderzoek werd duidelijk dat correct kiezen van een threshold van de zekerheidsgraad van gevonden labels een belangrijke factor was, verder onderzoek zou in detail kunnen uitzoeken welke threshold er de beste resultaten geeft voor welke providers. Verder lijkt het interessant om een soortgelijk onderzoek opnieuw uit te voeren binnen 5 à 10 jaar wanneer de computer vision modellen verder ontwikkeld zijn, er wordt verwacht dat op een moment de computer vision modellen beter kunnen labellen dan echte mensen.
 
