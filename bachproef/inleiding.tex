@@ -5,19 +5,19 @@
 \chapter{\IfLanguageName{dutch}{Inleiding}{Introduction}}
 \label{ch:inleiding}
 
-Machine learning en AI (Artificiële Intelligentie) heeft het laatste decennium een grote sprong voorwaarts gemaakt. Er wordt al sinds de jaren 50 onderzoek gedaan naar een vorm van AI maar door de noodzaak van complexe setups en benodigde compute power bleef AI eerder binnen de academische wereld en niet de bedrijfswereld. Sinds de opkomst van cloud computing wordt er echter een verandering waargenomen, steeds meer bedrijven kiezen ieder jaar voor de implementatie van een vorm van AI. Volgens een onderzoek gebaseerd op data van de US Census Bureau zou in 2018 3,5 percent van alle bedrijven in de Verenigde Staten AI reeds gebruiken of in testing hebben \autocite{Zolas2020}. Volgens de auteurs van dezelfde paper wordt er voorspeld dat AI een steeds grotere penetratie zal hebben in diverse bedrijfstakken.
+Machine learning en AI (Artificiële Intelligentie) heeft het laatste decennium een grote sprong voorwaarts gemaakt. Er wordt al sinds de jaren 50 onderzoek gedaan naar een vorm van artificiële intelligentie maar door de noodzaak van complexe setups en benodigde compute power bleef AI eerder binnen de academische wereld en niet de bedrijfswereld. Sinds de opkomst van cloud computing wordt er echter een verandering waargenomen, steeds meer bedrijven kiezen ieder jaar voor de implementatie van een vorm van AI. Volgens een onderzoek gebaseerd op data van de US Census Bureau zou in 2018 3,5 procent van alle bedrijven in de Verenigde Staten AI reeds gebruiken of in testing hebben \autocite{Zolas2020}. Volgens de auteurs van dezelfde paper wordt er voorspeld dat AI een steeds grotere penetratie zal hebben in diverse bedrijfstakken.
 
 \section{\IfLanguageName{dutch}{Probleemstelling}{Problem Statement}}
 \label{sec:probleemstelling}
-Op basis van deze evolutie lijkt het interessant om te onderzoeken of AI en machine learning kan toegepast worden op een concrete business case, met als belangrijskte doel dat de oplossing gemakkelijk gebruikt kan worden. Volgens \textcite{Zolas2020} gebruiken vooral grote bedrijven AI, het lijkt daarom interessant om te onderzoeken of ook een gemiddeld bedrijf gebruik kan maken van AI voor het oplossen van een concrete business case. Essentieel bij deze vraag is ease of use (of gemak van gebruik), een gemiddeld bedrijf moet de middelen en technische kennis in huis hebben vooropgesteld aan het gebruik van de AI. 
+Op basis van deze evolutie lijkt het interessant om te onderzoeken of AI en machine learning kan toegepast worden op een concrete business case. Volgens \textcite{Zolas2020} gebruiken vooral grote bedrijven AI, het lijkt daarom interessant om te onderzoeken of ook een gemiddeld bedrijf gebruik kan maken van AI voor het oplossen van een concrete business case. Essentieel bij deze vraag is ease of use (of gemak van gebruik), een gemiddeld bedrijf moet de middelen en technische kennis in huis hebben vooropgesteld aan het gebruik van de AI. 
 
-Bij het verfijnen van de onderzoeksvraag werd er gekozen om te focussen op het archiveren van foto's. Er zijn veel organisaties die grote foto-archieven hebben, zowel fysiek als digitaal, waarop niet gezocht kan worden - we begrijpen dat er geen manier is om via een 'zoek'-functie de foto's op te zoeken of te filteren. Het manueel zoekbaar maken van de foto-archieven is typisch een tijdrovend en vervelend werk, het automatiseren van dit proces zou voor grote winsten kunnen zorgen.
+Bij het verfijnen van de onderzoeksvraag werd er gekozen om te focussen op het archiveren van foto's. Er zijn veel organisaties die grote foto-archieven hebben, zowel fysiek als digitaal, waarop niet gezocht kan worden. Met 'niet-zoekbare' foto-archieven wordt er begrepen dat er geen manier is om via een 'zoek'-functie de foto's te filteren op basis van inhoud. Het manueel zoekbaar maken van de foto-archieven is typisch een tijdrovend en vervelend werk, het automatiseren van dit proces zou voor grote tijdswinsten kunnen zorgen.
 
-Het is belangrijk om op te merken dat foto-archieven een brede noemer is en dat het veel verschillende soorten foto's kan omvatten. Bijvoorbeeld foto's van gebouwen; landschappen; wildcamera's; kunstwerken; gezichten; wetenschapsonderwerpen, ...
+Het is belangrijk om op te merken dat foto-archieven een brede noemer is en dat het veel verschillende soorten foto's kan omvatten. Bijvoorbeeld foto's van gebouwen; landschappen; wildcamera's; kunstwerken; gezichten; wetenschapsonderwerpen; ...
 
-Tot slot is het belangrijk dat accuraatheid van de automatisch gedetecteerde labels voldoende hoog is,  in een productie-omgeving is het niet alleen belangrijk dat er labels worden toegewezen maar ook dat deze correct zijn. Er wordt een limiet van 15\% foute labels toegestaan.
+Tot slot is het belangrijk dat accuraatheid van de AI voldoende hoog is,  in een productie-omgeving is het niet alleen belangrijk dat de foto's automatisch zoekbaar worden maar ook dat ze correct ingedeeld worden. Na besprekingen met archivarissen van Archief Gent en computer vision developers wordt er besloten om een foutmarge van 15\% toe te staan.
 
-Uit de probleemstelling volgen 3 afgelijnde doelen:
+Uit de probleemstelling volgen 4 afgelijnde doelen:
 \begin{itemize}
     \item Foto's zoekbaar maken door middel van AI
     \item De oplossing moet gemakkelijk te gebruiken zijn
@@ -29,17 +29,13 @@ Uit de probleemstelling volgen 3 afgelijnde doelen:
 \label{sec:onderzoeksvraag}
 De onderzoeksvraag wordt opgebouwd op basis van de doelstellingen die uit de probleemstelling volgen.
 
-Een specifieke tak binnen AI genaamd computer vision kan gebruikt worden om een computer te laten ''zien'' en bepaalde objecten op de foto te herkennen. De gevonden objecten kunnen dan gebruikt worden om de foto's zoekbaar te maken, dit proces heet classificatie.
+Een specifieke tak binnen AI genaamd computer vision kan gebruikt worden om een computer te laten ''zien'' en bepaalde objecten op de foto te herkennen. De gevonden objecten kunnen dan gebruikt worden om de foto's zoekbaar te maken, dit proces heet classificatie. Er wordt dieper op deze onderwerpen ingegaan in Hoofdstuk \ref{ch:stand-van-zaken}.
 
-Om de oplossing gemakkelijk bruikbaar te maken moet er een minimum aan configuratie en opzet nodig zijn bij het gebruik van de AI. Daarom werd er in dit onderzoek gekozen om enkel pre-trained API's te gebruiken. Pre-trained betekent dat het model reeds getrained werd en dat er geen configuratie door de consument moet gebeuren. Het gebruik van API's, in tegenstelling tot het gebruiken van lokale setup, zorgt opnieuwe voor een gemakkelijkere opzet - men kan stellen dat de meeste bedrijven de middelen ter beschikking hebben om te integreren met een API.
+Om de oplossing gemakkelijk bruikbaar te maken moet er een minimum aan configuratie en opzet nodig zijn bij het gebruik van de AI. Daarom werd er in dit onderzoek gekozen om enkel pre-trained API's te gebruiken. Pre-trained betekent dat het model reeds getraind werd en dat er geen configuratie door de consument moet gebeuren. Het gebruik van API's, in tegenstelling tot het gebruiken van lokale setup, zorgt opnieuwe voor een gemakkelijkere opzet - men kan stellen dat de meeste bedrijven de middelen ter beschikking hebben om te integreren met een API.
 
-Om aan deze 3 doelen te voldoen werd er na inleidend onderzoek gekozen om de API's te gebruiken van de twee grootste spelers in het veld: Google Vision en Amazon AWS Rekognition.
+Om aan deze 3 doelen te voldoen werd er na inleidend onderzoek gekozen om de API's te gebruiken van de twee grootste spelers in het veld: Google Vision en Amazon AWS Rekognition en een kleinere speler genaamd imagga. Er wordt dieper op bovenstaande keuzes ingegaan in Hoofdstuk~\ref{ch:methodologie}.
 
-Voor het vergelijken van deze API's is het belangrijk dat er een representatieve data-set gebruikt wordt, na contact met het Stadsarchief van Stad Gent werd er toegestaan om een dataset te gebruiken van de Gentse Beeldbank bestaande uit 30 foto's. De dataset wordt aan beide API's aangeboden en de resultaten worden geanalyseerd.
-
-Er wordt dieper op bovestaande keuzes ingegaan in Hoofdstuk~\ref{ch:methodologie}.
-
-Samengevat komen we tot de onderzoeksvraag: Het nut van pre-trained machine learning API's voor het classificeren van foto-archieven: Een vergelijkende studie tussen Google Vision en AWS Rekognition
+Samengevat komen we tot de onderzoeksvraag: Het nut van pre-trained machine learning API's voor het classificeren van foto-archieven: Een vergelijkende studie tussen Google Vision, AWS Rekognition en imagga.
 
 \section{\IfLanguageName{dutch}{Onderzoeksdoelstelling}{Research objective}}
 \label{sec:onderzoeksdoelstelling}

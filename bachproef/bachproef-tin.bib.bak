@@ -118,4 +118,25 @@
   url          = {https://conference.nber.org/conf_papers/f138039.pdf},
 }
 
+@Online{Poza2020,
+  author = {Poza, Diego},
+  date   = {2020-11-19},
+  title  = {Captcha},
+  url    = {https://auth0.com/blog/captcha-can-ruin-your-ux-here-s-how-to-use-it-right},
+}
+
+@Online{pythonprogramming2021,
+  author = {pythonprogramming, tutorial},
+  date   = {2021},
+  title  = {Understanding Pixel Arrays},
+  url    = {https://pythonprogramming.net/python-pixel-arrays/},
+}
+
+@Online{Sunit2018,
+  author = {Saham Sunit},
+  date   = {2018-12-15},
+  title  = {A Comprehensive Guide to Convolutional Neural Networks — the ELI5 way},
+  url    = {https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53},
+}
+
 @Comment{jabref-meta: databaseType:biblatex;}
