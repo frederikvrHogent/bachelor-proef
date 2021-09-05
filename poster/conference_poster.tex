@@ -51,11 +51,11 @@
 % The widths of these boxes can be easily edited to accommodate your content as you see fit
 
 \begin{minipage}[t]{0.75\linewidth}
-\VeryHuge \color{HoGentAccent1} \textbf{Titel van uw bachelorproef} \color{Black}\\ % Title
-\Huge\textit{Ondertitel (eventueel)}\\[2.4cm] % Subtitle
-\huge \textbf{Naam Voornaam, co-promotor, promotor}\\[0.5cm] % Author(s)
+\VeryHuge \color{HoGentAccent1} \textbf{Het nut van pre-trained machine learning API’s voor het classificeren van foto-archieven} \color{Black}\\ % Title
+\Huge\textit{Een vergelijkende studie tussen Google Vision, AWS Rekognition en imagga}\\[2.4cm] % Subtitle
+\huge \textbf{Van Ruyskensvelde Frederik, Devos Timon, Dekoning Guy}\\[0.5cm] % Author(s)
 \huge Hogeschool Gent, Valentin Vaerwyckweg 1, 9000 Gent\\[0.4cm] % University/organization
-\Large \texttt{voornaam.naam@hogent.be} \\
+\Large \texttt{frederik.vanruyskensvelde@hogent.be} \\
 \end{minipage}
 %
 \begin{minipage}[t]{0.25\linewidth}
@@ -76,9 +76,7 @@
 \color{HoGentAccent1} % Navy color for the abstract
 
 \begin{abstract}
-It's only a model.
-You don't vote for kings. Who's that then? We found them. Ni! Ni! Ni! Ni!
-The nose? On second thoughts, let's not go there. It is a silly place. Bloody Peasant! And the hat. She's a witch! Where'd you get the coconuts?
+Computer vision is een veld in AI en wordt gebruikt om computers te laten ''zien''. In deze studie wordt onderzocht of computer vision gebruikt kan worden voor het labelen van foto-archieven aan de hand van 3 verschillende organisaties die computer vision aanbieden via een API. De organisaties achter deze API's zijn Google Vision, AWS Rekognition en imagga. Uit het onderzoek blijkt dat Google Vision en AWS Rekognition nuttig kunnen zijn bij het labelen van foto-archieven, ze kunnen echter geen mensen vervangen en kunnen als hulpmiddel aanzien worden.
 \end{abstract}
 %----------------------------------------------------------------------------------------
 %	INTRODUCTION
@@ -88,15 +86,9 @@ The nose? On second thoughts, let's not go there. It is a silly place. Bloody Pe
 \section*{Introductie}
 \color{black}
 \color{black}
-Be quiet! Found them? In Mercia?! The coconut's tropical! But you are dressed as one… Well, what do you want? Knights of Ni, we are but simple travelers who seek the enchanter who lives beyond these woods.
+Machine learning en AI (Artificiële Intelligentie) heeft het laatste decennium een sprong voorwaarts gemaakt. Sinds de opkomst van cloud computing kiezen steeds meer bedrijven voor de implementatie van een vorm van AI.
 
-Well, what do you want? It's only a model. Camelot! We found them. We shall say 'Ni' again to you, if you do not appease us.
-
-The nose? Shut up! Burn her! I am your king. You don't vote for kings.
-
-You can't expect to wield supreme power just 'cause some watery tart threw a sword at you! Well, we did do the nose. I don't want to talk to you no more, you empty-headed animal food trough water! I fart in your general direction! Your mother was a hamster and your father smelt of elderberries! Now leave before I am forced to taunt you a second time!
-
-Why do you think that she is a witch? We want a shrubbery!! I don't want to talk to you no more, you empty-headed animal food trough water! I fart in your general direction! Your mother was a hamster and your father smelt of elderberries! Now leave before I am forced to taunt you a second time!
+Op basis van deze evolutie leek het interessant om te onderzoeken of AI en machine learning kan toegepast worden op een concrete business case. Er zijn veel organisaties die grote foto-archieven hebben, zowel fysiek als digitaal, waarop niet gezocht kan worden. Het manueel zoekbaar maken van de foto-archieven is typisch een tijdrovend en vervelend werk, het automatiseren van dit proces zou voor grote tijdswinsten kunnen zorgen. Deze studie vergelijkt de resultaten van 3 verschillende computer vision providors bij het automatisch zoekbaar maken van archief-foto's. Er werd gekozen om enkel met computer vision providers te werken die een API aanbieden om de technische instap voor bedrijven zo klein mogelijk te houden.
 %----------------------------------------------------------------------------------------
 %	GEOLOGY
 %----------------------------------------------------------------------------------------
@@ -105,15 +97,9 @@ Why do you think that she is a witch? We want a shrubbery!! I don't want to talk
 \color{HoGentAccent1} 
 \section*{Experimenten}
 \color{black}
-A newt? Camelot! Why? No, no, no! Yes, yes. A bit. But she's got a wart.
+Om een realistisch experiment uit te voeren werd er via de Beeldbank van Archief Gent een dataset van 30 archief-foto's bekomen. De dataset bestaat uit foto's uit verschillende tijdsperiodes, van 1900 tot 2020.
 
-Shut up! I dunno. Must be a king. Who's that then? Look, my liege! On second thoughts, let's not go there. It is a silly place.
-
-Shut up! Will you shut up?! No, no, no! Yes, yes. A bit. But she's got a wart. He hasn't got shit all over him. It's only a model. It's only a model.
-
-Bring her forward! I don't want to talk to you no more, you empty-headed animal food trough water! I fart in your general direction! Your mother was a hamster and your father smelt of elderberries! Now leave 
-
-
+Deze foto's werden via een custom dotnet applicatie aan de 3 verschillende API's aangeboden, iedere API retourneerde voor iedere foto 3 labels (labels zijn zowel objecten op de foto als meer abstracte concepten) en bij iedere label een zekerheidsgraad. Alle resultaten werden via de dotnet applicatie naar een csv geschreven. Ieder geretourneerd label werd handmatig gescoord, van 'volledig correct' tot 'niet correct'. De scores werden voor iedere API vergeleken, er werd ook rekening gehouden met de zekerheidsgraad; alle labels met een zekerheidsgraad onder een bepaalde threshold - in dit onderzoek, \char`75\% -  werden in een aparte categorie ingedeeld.
 
 \color{HoGentAccent1} 
 \section*{Sectie met figuur}
@@ -121,28 +107,31 @@ Bring her forward! I don't want to talk to you no more, you empty-headed animal 
 
 
 \begin{center}\vspace{1cm}
-\includegraphics[width=1.0\linewidth]{grail}
-\captionof{figure}{\color{HoGentAccent5} He hasn't got shit all over him. The nose? Where'd you get the coconuts? What do you mean? We shall say 'Ni' again to you, if you do not appease us}
+\includegraphics[width=1.0\linewidth]{sample28}
+\captionof{figure}{\color{HoGentAccent5} Sample28 uit de dataset. Gevonden labels per API met zekerheidsgraad:
+    Google Vision: Building 86\%, Art 82\%, Vintage Clothing 74\%;
+    AWS Rekognition: Person 99\%, People 82\%, Funeral 74\%;
+    imagga: brass 29\%, wind instrument 29\%, musical instrument 24\%.
+Bron foto: ''Gent: Korenlei en Sint-Michielsbrug: concert door een militaire muziekkapel voor de verjaardag van de Duitse keizer Wilhelm II, 27 januari 1916'' - Beeldbank, Archief Gent (https://beeldbank.stad.gent/index.php)}
 \end{center}\vspace{1cm}
 
 %------------------------------------------------
 
-
-
 \color{HoGentAccent1} 
 \section*{Conclusies}
 \color{black}
-on't underestimate the Force. Oh God, my uncle. How am I ever gonna explain this? I suggest you try it again, Luke. This time, let go your conscious self and act on instinct. Don't be too proud of this technological terror you've constructed. The ability to destroy a planet is insignificant next to the power of the Force.
+Zowel Google Vision als AWS Rekognition kunnen gebruikt worden om foto's te labelen in een concrete business setting. imagga, de kleinste speler, scoorde niet hoog genoeg om bruikbaar te zijn. 
+
+De setup en configuratie is minimaal en kan door een gemiddeld bedrijf opgezet worden. Idealiter wordt er een front-end rond een of meerdere van deze API’s gebouwd en kan een gewone PC gebruiker automatische labeling laten uitvoeren.
+
+De labeling door API's heeft een hoge mate van correctheid (\char`\~ 90\%), toch schieten de API's momenteel op 1 vlak duidelijk te kort: het ontbreken van context. Context zorgt er voor dat een persoon aan de hand van de volledige informatie vervat in de afbeelding kan inschatten welke labels er toepasbaar zijn. De computer vision API's ontbreken deze context volledig en geven bijgevolg regelmatig labels die te algemeen zijn en weinig waarde toevoegen. Het is dan ook belangrijk om te benadrukken dat de API's besproken in deze studie manuele labeling niet kan vervangen, het is interessanter om ze als een hulpmiddel te zien die archivarissen kunnen helpen om foto's sneller te labelen.
 %----------------------------------------------------------------------------------------
 %	FORTHCOMING RESEARCH
 %----------------------------------------------------------------------------------------
 \color{HoGentAccent1} 
 \section*{Toekomstig onderzoek}
 \color{black}
-
-I care. So, what do you think of her, Han? No! Alderaan is peaceful. We have no weapons. You can't possibly… I have traced the Rebel spies to her. Now she is my only link to finding their secret base.
-
-Kid, I've flown from one side of this galaxy to the other. I've seen a lot of strange stuff, but I've never seen anything to make me believe there's one all-powerful Force controlling everything. There's no mystical energy field that controls my destiny. It's all a lot of simple tricks and nonsense. You are a part of the Rebel Alliance and a traitor! Take her away! 
+Het laatste decennium heeft computer vision op korte tijd veel vooruitgang geboekt, het zou dan ook interessant om een soortgelijk onderzoek opnieuw uit te voeren binnen 5 à 10 jaar en de resultaten te vergelijken. Verder onderzoek kan zich ook focussen op het dieper onderzoeken van de zekerheidsgraad threshold; welke threshold zorgt er voor de hoogste scores per API.
 
 
 %----------------------------------------------------------------------------------------
